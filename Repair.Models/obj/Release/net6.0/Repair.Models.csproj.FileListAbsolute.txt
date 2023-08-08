@@ -1,0 +1,12 @@
+D:\新建文件夹\DBDesign\Repair.Models\bin\Release\net6.0\Repair.Models.deps.json
+D:\新建文件夹\DBDesign\Repair.Models\bin\Release\net6.0\Repair.Models.dll
+D:\新建文件夹\DBDesign\Repair.Models\bin\Release\net6.0\Repair.Models.pdb
+D:\新建文件夹\DBDesign\Repair.Models\obj\Release\net6.0\Repair.Models.csproj.AssemblyReference.cache
+D:\新建文件夹\DBDesign\Repair.Models\obj\Release\net6.0\Repair.Models.GeneratedMSBuildEditorConfig.editorconfig
+D:\新建文件夹\DBDesign\Repair.Models\obj\Release\net6.0\Repair.Models.AssemblyInfoInputs.cache
+D:\新建文件夹\DBDesign\Repair.Models\obj\Release\net6.0\Repair.Models.AssemblyInfo.cs
+D:\新建文件夹\DBDesign\Repair.Models\obj\Release\net6.0\Repair.Models.csproj.CoreCompileInputs.cache
+D:\新建文件夹\DBDesign\Repair.Models\obj\Release\net6.0\Repair.Models.dll
+D:\新建文件夹\DBDesign\Repair.Models\obj\Release\net6.0\refint\Repair.Models.dll
+D:\新建文件夹\DBDesign\Repair.Models\obj\Release\net6.0\Repair.Models.pdb
+D:\新建文件夹\DBDesign\Repair.Models\obj\Release\net6.0\ref\Repair.Models.dll

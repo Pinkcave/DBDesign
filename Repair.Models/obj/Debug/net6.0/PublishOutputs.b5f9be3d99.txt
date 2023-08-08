@@ -1,0 +1,3 @@
+D:\新建文件夹\DBDesign\Repair.Models\bin\Debug\net6.0\publish\Repair.Models.dll
+D:\新建文件夹\DBDesign\Repair.Models\bin\Debug\net6.0\publish\Repair.Models.deps.json
+D:\新建文件夹\DBDesign\Repair.Models\bin\Debug\net6.0\publish\Repair.Models.pdb

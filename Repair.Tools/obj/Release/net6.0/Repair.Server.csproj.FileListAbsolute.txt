@@ -1,0 +1,17 @@
+D:\新建文件夹\DBDesign\Repair.Tools\obj\Release\net6.0\Repair.Server.csproj.AssemblyReference.cache
+D:\新建文件夹\DBDesign\Repair.Tools\obj\Release\net6.0\Repair.Server.GeneratedMSBuildEditorConfig.editorconfig
+D:\新建文件夹\DBDesign\Repair.Tools\obj\Release\net6.0\Repair.Server.AssemblyInfoInputs.cache
+D:\新建文件夹\DBDesign\Repair.Tools\obj\Release\net6.0\Repair.Server.AssemblyInfo.cs
+D:\新建文件夹\DBDesign\Repair.Tools\obj\Release\net6.0\Repair.Server.csproj.CoreCompileInputs.cache
+D:\新建文件夹\DBDesign\Repair.Tools\bin\Release\net6.0\Repair.Server.deps.json
+D:\新建文件夹\DBDesign\Repair.Tools\bin\Release\net6.0\Repair.Server.dll
+D:\新建文件夹\DBDesign\Repair.Tools\bin\Release\net6.0\Repair.Server.pdb
+D:\新建文件夹\DBDesign\Repair.Tools\bin\Release\net6.0\Repair.Helper.dll
+D:\新建文件夹\DBDesign\Repair.Tools\bin\Release\net6.0\Repair.Models.dll
+D:\新建文件夹\DBDesign\Repair.Tools\bin\Release\net6.0\Repair.Helper.pdb
+D:\新建文件夹\DBDesign\Repair.Tools\bin\Release\net6.0\Repair.Models.pdb
+D:\新建文件夹\DBDesign\Repair.Tools\obj\Release\net6.0\Repair.Server.csproj.CopyComplete
+D:\新建文件夹\DBDesign\Repair.Tools\obj\Release\net6.0\Repair.Server.dll
+D:\新建文件夹\DBDesign\Repair.Tools\obj\Release\net6.0\refint\Repair.Server.dll
+D:\新建文件夹\DBDesign\Repair.Tools\obj\Release\net6.0\Repair.Server.pdb
+D:\新建文件夹\DBDesign\Repair.Tools\obj\Release\net6.0\ref\Repair.Server.dll
