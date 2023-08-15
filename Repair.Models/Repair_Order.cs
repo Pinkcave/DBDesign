@@ -14,7 +14,7 @@ namespace Repair.Models
         #region Model
         private string orderid;
         private float? orderprice;
-        private Coupon couponid;
+        private Coupon? couponid;
         private string engineerid;
         private string userid;
         private Repair_Options repairoptionid;

@@ -36,36 +36,38 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("{id}")]
-        public async Task<JsonObject> CreateOrder(string id)
+        public async Task<JsonObject> CreateOrder(string id, [FromBody]JsonObject Job)
         {
             JsonObject ret = new JsonObject();
-            if (Request != null)
+            if (Request != null && UserServer.Query(id).Count!=0 
+                && Job.ContainsKey("Device_Cate") && Job.ContainsKey("Device_Type") 
+                && Job.ContainsKey("ExpectedPrice") && Job.ContainsKey("Recycle_Location") && Job.ContainsKey("Recycle_Time"))
             {
-                using (StreamReader stream = new StreamReader(Request.Body))
+                //JsonObject Job = (JsonObject)(JsonObject.Parse(await stream.ReadToEndAsync()));
+                Job.Add("UserID", id);
+                Job.Add("OrderID", (RecycleOrderServer.Count()+10000).ToString());
+                Recycle_Order order = JsonSerializer.Deserialize<Recycle_Order>(Job);
+                Device device = new Device();
+                device.DeviceID = DeviceServer.Count().ToString();
+                device.Device_Cate_ID = DeviceCateServer.QueryByAttribute("category_name", "\'" + Job["Device_Cate"].ToString() + "\'").FirstOrDefault();
+                device.Device_Type_ID = DeviceTypeServer.QueryByAttribute("type_name", "\'" + Job["Device_Type"].ToString() + "\'").FirstOrDefault();
+                int row = DeviceServer.Insert(device);
+                if (row>=0)
                 {
-                    JsonObject Job = (JsonObject)(JsonObject.Parse(await stream.ReadToEndAsync()));
-                    Job.Add("UserID", id);
-                    Job.Add("OrderID", RecycleOrderServer.Count());
-                    Job.Add("Recycle_Time", DateTime.Now);
-                    Recycle_Order order = JsonSerializer.Deserialize<Recycle_Order>(Job);
-                    Device device = new Device();
-                    device.DeviceID = DeviceServer.Count().ToString();
-                    device.Device_Cate_ID = DeviceCateServer.QueryByAttribute("categoryname", "\'" + Job["device_cate"].ToString() + "\'").FirstOrDefault();
-                    device.Device_Type_ID = DeviceTypeServer.QueryByAttribute("typename", "\'" + Job["device_type"].ToString() + "\'").FirstOrDefault();
-                    DeviceServer.Insert(device);
                     order.Device = device;
-                    int row = RecycleOrderServer.Insert(order);
-
-                    if (row >= 0)
-                    {
-                        ret.Add("success", true);
-                    }
-
-                    else
-                    {
-                        ret.Add("success", false);
-                    }
+                    row = RecycleOrderServer.Insert(order);
                 }
+                
+                if (row >= 0)
+                {
+                    ret.Add("success", true);
+                }
+                
+                else
+                {
+                    ret.Add("success", false);
+                }
+                
             }
             else
             {
@@ -91,31 +93,28 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("{id}/{orderid}")]
-        public async Task<JsonObject> ModifyOrder(string id , string orderid)
+        public JsonObject ModifyOrder(string id , string orderid, [FromBody]JsonObject Job)
         {
             JsonObject ret = new JsonObject();
-            if(Request == null)
+            if (Request != null && UserServer.Query(id).Count != 0 && RecycleOrderServer.Query(orderid).Count != 0
+                && Job.ContainsKey("ExpectedPrice") && Job.ContainsKey("Recycle_Location") && Job.ContainsKey("Recycle_Time"))
             {
-                ret.Add("success", false);
-            }
-            else
-            {
-                using (StreamReader stream = new StreamReader(Request.Body))
-                {
-                    JsonObject Job = (JsonObject)(JsonObject.Parse(await stream.ReadToEndAsync()));
-                    Job.Add("userid", id);
-                    Job.Add("orderid", orderid);
-                    Recycle_Order order = JsonSerializer.Deserialize<Recycle_Order>(Job);
-                    int row = RecycleOrderServer.Update(order, id);
+                //Job = (JsonObject)(JsonObject.Parse(await stream.ReadToEndAsync()));
+                Job.Add("UserID", id);
+                Job.Add("OrderID", orderid);
+                Recycle_Order order= RecycleOrderServer.Query(orderid).FirstOrDefault();
+                order.ExpectedPrice = (float)Job["ExpectedPrice"];
+                order.Recycle_Location = Job["Recycle_Location"].ToString();
+                order.Recycle_Time = (DateTime)Job["Recycle_Time"];
+                int row = RecycleOrderServer.Update(order, orderid);
 
-                    if (row > 0)
-                    {
-                        ret.Add("success", true);
-                    }
-                    else
-                    {
-                        ret.Add("success", false);
-                    }
+                if (row > 0)
+                {
+                    ret.Add("success", true);
+                }
+                else
+                {
+                    ret.Add("success", false);
                 }
             }
             return ret;

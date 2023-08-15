@@ -22,10 +22,11 @@ namespace Repair.Models
         private string pwd;
         private string working_center;
 
-        public string WorkingCenter
+        
+        public string ID
         {
-            get { return working_center; }
-            set { working_center = value; }
+            get { return id; }
+            set { id = value; }
         }
 
         public string Password
@@ -34,11 +35,7 @@ namespace Repair.Models
             set { pwd = value; }
         }
 
-        public string ID
-        {
-            get { return id; }
-            set { id = value; }
-        }
+        
 
         public string Name
         {
@@ -68,6 +65,11 @@ namespace Repair.Models
         {
             get { return rate; }
             set { rate = value; }
+        }
+        public string WorkingCenter
+        {
+            get { return working_center; }
+            set { working_center = value; }
         }
         #endregion
     }

@@ -14,7 +14,7 @@ namespace Repair.Models
         #region Model
         private string typeid;
         private string type_name;
-        private string url;
+        private List<string> url;
         private string brand;
         private string normalprice;
 
@@ -30,7 +30,7 @@ namespace Repair.Models
             set { type_name = value; }
         }
 
-        public string Structure_Url
+        public List<string> Structure_Url
         {
             get { return url; }
             set { url = value; }

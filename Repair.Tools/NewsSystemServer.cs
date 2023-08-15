@@ -46,7 +46,7 @@ namespace Repair.Server
         public static List<News_System> QueryByAttribute(string attribute,string value)
         {
             string sql = "select * from News_System where {0} = {1}";
-            sql=string.Format(attribute,value);
+            sql=string.Format(sql,attribute,value);
             List<News_System> userlist = new List<News_System>();
             using (OracleDataReader reader = DBHelper.GetDataReader(sql, null))
             {

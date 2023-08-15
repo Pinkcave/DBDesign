@@ -31,7 +31,10 @@ namespace Repair.Server
                     Object.ID = reader.GetString(0);
                     Object.Name = reader.GetString(1);
                     Object.Loc_Detail = reader.GetString(2);
-                    Object.TIMG_URL = reader.GetString(3);
+                    Object.Tel = reader.GetString(3);
+                    Object.TIMG_URL = reader.GetString(4);
+                    Object.Latitude = reader.GetFloat(5);
+                    Object.Longitude = reader.GetFloat(6);
                     list.Add(Object);
                 }
                 reader.Close();
@@ -43,7 +46,7 @@ namespace Repair.Server
         {
             string sql;
             sql = "select * from Service_Center where {0} = {1}";
-            sql = string.Format(attribute, value);
+            sql = string.Format(sql, attribute, value);
             List<Service_Center> list = new List<Service_Center>();
             using (OracleDataReader reader = DBHelper.GetDataReader(sql, null))
             {

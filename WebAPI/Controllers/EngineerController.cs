@@ -10,6 +10,16 @@ namespace WebAPI.Controllers
     [Route("[controller]")]
     public class EngineerController : Controller
     {
+        [HttpGet]
+        public JsonObject GetAllEngineers()
+        {
+            JsonObject ret = new JsonObject();
+            List<Engineer> engineers = EngineerServer.Query();
+            ret.Add("num", engineers.Count);
+            ret.Add("engineers", JsonObject.Parse(JsonSerializer.Serialize(engineers)));
+            return ret;
+        }
+
         [HttpGet("{id}")]
         public JsonObject GetEngineerInfo(string id)
         {

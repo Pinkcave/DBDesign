@@ -41,8 +41,7 @@ namespace Repair.Server
 
         public static List<Device_Cate> QueryByAttribute(string attribute,string value)
         {
-            string sql = "select * from Device_Cate where {0} = {1}";
-            sql = string.Format(attribute, value);
+            string sql = string.Format("select * from Device_Cate where {0} = {1}",attribute, value);
             
             List<Device_Cate> ObjectList = new List<Device_Cate>();
             using (OracleDataReader reader = DBHelper.GetDataReader(sql, null))

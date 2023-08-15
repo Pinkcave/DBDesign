@@ -6,8 +6,6 @@ using System.Text.Json;
 
 namespace WebAPI.Controllers
 {
-   
-    
     [Route("[controller]")]
     [ApiController]
     public class DeviceController : Controller

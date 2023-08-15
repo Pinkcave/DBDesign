@@ -11,8 +11,11 @@ namespace Repair.Helper
     public class DBHelper
     {
         private static string connstr = "Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=110.42.220.245)(PORT=1521))"
-                                         + "(CONNECT_DATA=(SERVICE_NAME=xe)));"
-                                         + "Persist Security Info=True;User ID=jay;Password=123456;";
+                                          + "(CONNECT_DATA=(SERVICE_NAME=xe)));"
+                                          + "Persist Security Info=True;User ID=jay;Password=123456;";
+        /*private static string connstr = "Data Source=(DESCRIPTION =(ADDRESS = (PROTOCOL = TCP)(HOST = localhost)(PORT = 1521))"
+                                          + "(CONNECT_DATA =(SERVER = DEDICATED)(SERVICE_NAME = orcl)));"
+                                          + "Persist Security Info=True;User ID=C##NIJIKA;Password=nijika6425317;";*/
 
         /// <summary>
         /// 修改

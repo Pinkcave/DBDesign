@@ -36,6 +36,7 @@ namespace Repair.Server
                     Object.ExpectedPrice = reader.GetFloat(3);
                     Object.Recycle_Location = reader.GetString(4);
                     Object.Recycle_Time = reader.GetDateTime(5);
+                    list.Add(Object);
                 }
                 reader.Close();
             }
@@ -46,7 +47,7 @@ namespace Repair.Server
         {
             string sql;
             sql = "select * from Recycle_Order where {0} = {1}";
-            sql = string.Format(attribute, value);
+            sql = string.Format(sql,attribute, value);
             List<Recycle_Order> list = new List<Recycle_Order>();
             using (OracleDataReader reader = DBHelper.GetDataReader(sql, null))
             {
@@ -71,9 +72,9 @@ namespace Repair.Server
             //Recycle_Order? order = JsonSerializer.Deserialize<Recycle_Order>(JsonInfo);
             if (order == null)
                 return -1;
-            string sql = "insert into " + Recycle_Order.GetName + " values(" + "\'" + order.OrderID + "\'," + "\'" + order.Device.DeviceID + "\'," + "\'" + order.UserID + "\'," + order.ExpectedPrice + ",\'" + order.Recycle_Location + "\',"
-                + order.Recycle_Time + ")";
-
+            //string sql = "insert into " + Recycle_Order.GetName + " values(" + "\'" + order.OrderID + "\'," + "\'" + order.Device.DeviceID + "\'," + "\'" + order.UserID + "\'," + order.ExpectedPrice + ",\'" + order.Recycle_Location + "\',"
+             //   + order.Recycle_Time + ")";
+            string sql = string.Format("insert into {0} values(\'{1}\',\'{2}\',\'{3}\',{4},\'{5}\',to_date(\'{6}\',\'MM/DD/YYYY HH24:MI:SS\'))", Recycle_Order.GetName, order.OrderID, order.Device.DeviceID, order.UserID, order.ExpectedPrice, order.Recycle_Location, order.Recycle_Time);
             int row = DBHelper.RunExecNonQuery(sql, null);
             return row;
         }
@@ -98,7 +99,7 @@ namespace Repair.Server
             string sql = "update " + Recycle_Order.GetName + " set "
                          + "OrderID=:new_OrderID, DeviceID=:new_DeviceID, UserID=:new_UserID,"
                          + "ExpectedPrice=:new_Price, Recycle_Location=:new_Loc, Recycle_Time=:new_Time"
-                         + " where id=\'" + old_id + "\'";
+                         + " where orderid=\'" + old_id + "\'";
             OracleParameter[] param =
             {
                 new OracleParameter(":new_OrderID", OracleDbType.Varchar2, order.OrderID, ParameterDirection.Input),

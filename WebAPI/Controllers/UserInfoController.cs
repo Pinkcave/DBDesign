@@ -47,7 +47,7 @@ namespace WebAPI.Controllers
         public IEnumerable<UserInfo> GetUserInfo(string uid)
         {
             List<UserInfo> user= UserServer.Query(uid);
-            Console.WriteLine(uid);
+            //Console.WriteLine(uid);
             return user;
         }
         

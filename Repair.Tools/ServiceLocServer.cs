@@ -42,7 +42,7 @@ namespace Repair.Server
         public static List<Service_Loc> QueryByAttribute(string attribute,string value)
         {
             string sql = "selece=t * from Sevice_Loc where {0} = {1}";
-            sql = string.Format(attribute, value);
+            sql = string.Format(sql, attribute, value);
             List<Service_Loc> list = new List<Service_Loc>();
             using (OracleDataReader reader = DBHelper.GetDataReader(sql, null))
             {
@@ -101,6 +101,18 @@ namespace Repair.Server
 
             int row = DBHelper.RunExecNonQuery(sql, param);
             return row;
+        }
+
+        public static int Count()
+        {
+            string sql = "select tablecount from counter where tablename = \'SERVICE_LOC\'";
+            int ret = -1;
+            using (OracleDataReader reader = DBHelper.GetDataReader(sql, null))
+            {
+                reader.Read();
+                ret = reader.GetInt32(0);
+            }
+            return ret;
         }
     }
 }

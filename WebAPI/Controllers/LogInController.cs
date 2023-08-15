@@ -17,12 +17,26 @@ namespace WebAPI.Controllers
     [Route("[controller]")]
     public class LogInController : Controller
     {
+        private List<VerifyCode> verifycodes = new List<VerifyCode>();
+        public LogInController()
+        {
+            verifycodes.Add(new VerifyCode() { CodeToken = "K9bF2", CodeImage = "http://110.42.220.245:8081/Image/verifycode.jpeg" });
+            verifycodes.Add(new VerifyCode() { CodeToken = "AEZUT", CodeImage = "http://110.42.220.245:8081/Image/verifycode1.png" });
+            verifycodes.Add(new VerifyCode() { CodeToken = "8NYF5", CodeImage = "http://110.42.220.245:8081/Image/verifycode2.png" });
+            verifycodes.Add(new VerifyCode() { CodeToken = "QFCPE", CodeImage = "http://110.42.220.245:8081/Image/verifycode3.png" });
+            verifycodes.Add(new VerifyCode() { CodeToken = "FGIP", CodeImage = "http://110.42.220.245:8081/Image/verifycode4.png" });
+            verifycodes.Add(new VerifyCode() { CodeToken = "VENR", CodeImage = "http://110.42.220.245:8081/Image/verifycode5.png" });
+            verifycodes.Add(new VerifyCode() { CodeToken = "6KAY", CodeImage = "http://110.42.220.245:8081/Image/verifycode6.png" });
+            verifycodes.Add(new VerifyCode() { CodeToken = "Q8UC", CodeImage = "http://110.42.220.245:8081/Image/verifycode7.png" });
+            verifycodes.Add(new VerifyCode() { CodeToken = "QPZ6", CodeImage = "http://110.42.220.245:8081/Image/verifycode8.png" });
+            verifycodes.Add(new VerifyCode() { CodeToken = "kBV8", CodeImage = "http://110.42.220.245:8081/Image/verifycode9.png" });
+        }
         [HttpGet]
         public string UserVerify()
         {
             VerifyCode vcode = new VerifyCode();
-            vcode.CodeToken = "K9bF2";
-            vcode.CodeImage = "http://110.42.220.245:8081/Image/K9bF2.jepg";
+            var rd = new Random();
+            vcode = verifycodes[rd.Next(0,10)];
             return JsonSerializer.Serialize(vcode);
         }
 

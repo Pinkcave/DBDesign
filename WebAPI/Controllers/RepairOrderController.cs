@@ -31,14 +31,41 @@ namespace WebAPI.Controllers
         [HttpPost("{uid}")]
         public JsonObject CreateOrder(string uid, [FromBody] JsonObject Job)
         {
-            Job.Add("UserID", uid);
-            Job.Add("OrderID", RepairOrderServer.Count());
-            Job.Add("OrderStatus", false);
-            Repair_Order neworder = JsonSerializer.Deserialize<Repair_Order>(Job);
-            neworder.CouObj = CouponServer.Query(Job["CouponID"].ToString()).FirstOrDefault();
-            neworder.RepairOptionID = RepairOptionServer.Query(Job["OptionID"].ToString()).FirstOrDefault();
-            int row = RepairOrderServer.Insert(neworder);
             JsonObject ret = new JsonObject();
+            if (Request.Body == null || !Job.ContainsKey("CouponID") || !Job.ContainsKey("EngineerID") || !Job.ContainsKey("OptionID")
+                || !Job.ContainsKey("RepairLocation") || !Job.ContainsKey("RepairTime"))
+            {
+                ret.Add("success", false);
+                return ret;
+            }
+
+            int row = -1;
+            if (UserServer.Query(uid).Count != 0 && EngineerServer.Query(Job["EngineerID"].ToString()).Count != 0)
+            {
+                Job.Add("UserID", uid);
+                Job.Add("OrderID", (RepairOrderServer.Count() + 10000).ToString());
+                Job.Add("OrderStatus", 0);
+                Repair_Order neworder = JsonSerializer.Deserialize<Repair_Order>(Job);
+                if (Job["CouponID"] != null)
+                {
+                    neworder.CouObj = CouponServer.Query(Job["CouponID"].ToString()).FirstOrDefault();
+                }
+                    
+                else
+                {
+                    neworder.CouObj = null;
+                }
+                neworder.RepairOptionID = RepairOptionServer.Query(Job["OptionID"].ToString()).FirstOrDefault();
+                neworder.CreateTime = DateTime.Now;
+
+                if (neworder.RepairOptionID == null)
+                {
+                    ret.Add("success", false);
+                    return ret;
+                }
+                row = RepairOrderServer.Insert(neworder);
+            }
+            
             if (row == 1)
             {
                 ret.Add("success", true);
@@ -69,12 +96,23 @@ namespace WebAPI.Controllers
         [HttpPost("{uid}/{id}")]
         public JsonObject UpdateOrder(string uid, string id, [FromBody] JsonObject Job)
         {
-            Job.Add("UserID", uid);
-            Job.Add("OrderID", id);
-            Repair_Order neworder = JsonSerializer.Deserialize<Repair_Order>(Job);
-            neworder.RepairOptionID = RepairOptionServer.Query(Job["OptionID"].ToString()).FirstOrDefault();
-            int row = RepairOrderServer.Update(neworder,id);
             JsonObject ret = new JsonObject();
+            if (Request.Body == null || !Job.ContainsKey("CouponID") || !Job.ContainsKey("EngineerID") || !Job.ContainsKey("OptionID")
+                || !Job.ContainsKey("RepairLocation") || !Job.ContainsKey("RepairTime"))
+            {
+                ret.Add("success", false);
+                return ret;
+            }
+            int row = -1;
+            if (UserServer.Query(uid).Count != 0 && EngineerServer.Query(Job["EngineerID"].ToString()).Count != 0)
+            {
+                Job.Add("UserID", uid);
+                Job.Add("OrderID", id);
+                Repair_Order neworder = JsonSerializer.Deserialize<Repair_Order>(Job);
+                neworder.RepairOptionID = RepairOptionServer.Query(Job["OptionID"].ToString()).FirstOrDefault();
+                row = RepairOrderServer.Update(neworder, id);
+            }
+            
             if (row == 1)
             {
                 ret.Add("success", true);

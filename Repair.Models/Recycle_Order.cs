@@ -9,7 +9,7 @@ namespace Repair.Models
     public class Recycle_Order
     {
         public Recycle_Order() { }
-        private static string TABLE_NAME = "RECYCLE_NAME";
+        private static string TABLE_NAME = "RECYCLE_ORDER";
         public static string GetName { get { return TABLE_NAME; } }
         #region Model
         private string orderid;

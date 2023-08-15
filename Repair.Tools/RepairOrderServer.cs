@@ -31,15 +31,16 @@ namespace Repair.Server
                 {
                     Repair_Order Object = new Repair_Order();
                     Object.OrderID = reader.GetString(0);
-                    Object.OrderPrice = reader.GetFloat(1);
-                    Object.CouponID = reader.GetString(2);
+                    Object.OrderPrice = reader.IsDBNull(1) ? null : reader.GetFloat(1);
+                    Object.CouponID = reader.IsDBNull(2) ? null : reader.GetString(2);
+                    Object.CouObj = CouponServer.Query(Object.CouponID).FirstOrDefault();
                     Object.EngineerID = reader.GetString(3);
                     Object.UserID = reader.GetString(4);
                     Object.RepairOptionID = RepairOptionServer.Query(reader.GetString(5)).FirstOrDefault();
                     Object.CreateTime = reader.GetDateTime(6);
                     Object.RepairLocation = reader.GetString(7);
                     Object.RepairTime = reader.GetDateTime(8);
-                    Object.UserRate = reader.GetString(9);
+                    Object.UserRate = reader.IsDBNull(9) ? null : reader.GetString(9);
                     Object.OrderStatus = reader.GetInt32(10);
 
                     string InnerSql = "select * from COUPON where id=\'" + Object.CouponID + "\'";
@@ -62,7 +63,7 @@ namespace Repair.Server
         {
             string sql;
             sql = "select * from " + Repair_Order.GetName + " where {0} = {1}";
-            sql = string.Format(attribute, value);
+            sql = string.Format(sql,attribute, value);
             
             List<Repair_Order> list = new List<Repair_Order>();
             using (OracleDataReader reader = DBHelper.GetDataReader(sql, null))
@@ -71,15 +72,16 @@ namespace Repair.Server
                 {
                     Repair_Order Object = new Repair_Order();
                     Object.OrderID = reader.GetString(0);
-                    Object.OrderPrice = reader.GetFloat(1);
-                    Object.CouponID = reader.GetString(2);
+                    Object.OrderPrice = reader.IsDBNull(1) ? null : reader.GetFloat(1);
+                    Object.CouponID = reader.IsDBNull(2) ? null : reader.GetString(2);
+                    Object.CouObj = CouponServer.Query(Object.CouponID).FirstOrDefault();
                     Object.EngineerID = reader.GetString(3);
                     Object.UserID = reader.GetString(4);
                     Object.RepairOptionID = RepairOptionServer.Query(reader.GetString(5)).FirstOrDefault();
                     Object.CreateTime = reader.GetDateTime(6);
                     Object.RepairLocation = reader.GetString(7);
                     Object.RepairTime = reader.GetDateTime(8);
-                    Object.UserRate = reader.GetString(9);
+                    Object.UserRate = reader.IsDBNull(9) ? null : reader.GetString(9);
                     Object.OrderStatus = reader.GetInt32(10);
 
                     string InnerSql = "select * from COUPON where id=\'" + Object.CouponID + "\'";
@@ -105,16 +107,19 @@ namespace Repair.Server
                 return -1;
             string sql = "insert into " + Repair_Order.GetName + " values("
                             + "\'" + user.OrderID + "\',"
-                            +       (user.OrderPrice==null ? "null": user.OrderPrice) + ","
-                            + "\'" + user.CouponID + "\',"
+                            + (user.OrderPrice == null ? "null" : user.OrderPrice) + ","
+                            + (user.CouObj == null ? "null," : "\'" + user.CouponID + "\',")
                             + "\'" + user.EngineerID + "\',"
                             + "\'" + user.UserID + "\',"
                             + "\'" + user.RepairOptionID.OptionID + "\',"
-                            + "to_timestamp(\'" + user.CreateTime + "\',\'YYYY/MM/DD HH24:MI:SS\'),"
+                            + "to_date(\'" + user.CreateTime + "\',\'MM/DD/YYYY HH24:MI:SS\'),"
                             + "\'" + user.RepairLocation + "\',"
-                            +"to_timestamp(\'" + user.RepairTime + "\',\'YYYY/MM/DD HH24:MI:SS\'),"
+                            + "to_date(\'" + user.RepairTime + "\',\'MM/DD/YYYY HH24:MI:SS\'),"
                             + (user.UserRate == null ? "null," : "\'" + user.UserRate + "\',")
                             + "\'" + user.OrderStatus + "\')";
+            Console.WriteLine(sql);
+            Console.WriteLine("\n");
+            Console.WriteLine(user.RepairTime+" "+user.CreateTime);
             int row = DBHelper.RunExecNonQuery(sql, null);
             return row;
         }

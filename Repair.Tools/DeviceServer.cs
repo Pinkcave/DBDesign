@@ -17,30 +17,16 @@ namespace Repair.Server
 
     public class DeviceServer
     {
-        public static List<Device> Query(string? id = null,bool distinct = false)
+        public static List<Device> Query(string? id = null)
         {
             string sql;
             if (id != null)
             {
-                if (distinct)
-                {
-                    sql = "select distinct * from " + Device.GetName + " where id=" + "\'" + id + "\'";
-                }
-                else
-                {
-                    sql = "select * from " + Device.GetName + " where id=" + "\'" + id + "\'";
-                }
+                sql = "select * from " + Device.GetName + " where deviceid=" + "\'" + id + "\'";
             }
             else
             {
-                if (distinct)
-                {
-                    sql = "select distinct * from " + Device.GetName;
-                }
-                else
-                {
-                    sql = "select * from " + Device.GetName;
-                }
+                sql = "select * from " + Device.GetName;
             }
             List<Device> list = new List<Device>();
             using (OracleDataReader reader = DBHelper.GetDataReader(sql, null))

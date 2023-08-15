@@ -30,8 +30,8 @@ namespace Repair.Server
                     Device_Type Object = new Device_Type();
                     Object.TypeID = reader.GetString(0);
                     Object.Type_Name = reader.GetString(1);
-                    Object.Structure_Url = reader.GetString(2);
-                    Object.Brand = reader.GetString(3);
+                    Object.Brand = reader.GetString(2);
+                    Object.Structure_Url = JsonSerializer.Deserialize<List<string>>(reader.GetString(3));
                     list.Add(Object);
                 }
                 reader.Close();
@@ -41,8 +41,7 @@ namespace Repair.Server
 
         public static List<Device_Type> QueryByAttribute(string attribute , string value)
         {
-            string sql = "select * from Device_Type where (0) = {1}";
-            sql = string.Format(attribute, value);
+            string sql = string.Format("select * from Device_Type where {0} = {1}",attribute, value);
             List<Device_Type> list = new List<Device_Type>();
             using (OracleDataReader reader = DBHelper.GetDataReader(sql, null))
             {
@@ -51,7 +50,8 @@ namespace Repair.Server
                     Device_Type Object = new Device_Type();
                     Object.TypeID = reader.GetString(0);
                     Object.Type_Name = reader.GetString(1);
-                    Object.Structure_Url = reader.GetString(2);
+                    Object.Brand = reader.GetString(2);
+                    Object.Structure_Url = JsonSerializer.Deserialize<List<string>>(reader.GetString(3));
                     list.Add(Object);
                 }
             }

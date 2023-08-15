@@ -25,7 +25,7 @@ namespace WebAPI.Controllers
         [HttpPost("{uid}")]
         public JsonObject NewLocation(string uid,[FromBody] JsonObject Job)
         {
-            Job.Add("id", Guid.NewGuid().ToString().Replace("-", "").ToUpper());
+            Job.Add("id", ServiceLocServer.Count().ToString());
             Job.Add("customerid", uid);
             Service_Loc loc = JsonSerializer.Deserialize<Service_Loc>(Job);
             int row = ServiceLocServer.Insert(loc);

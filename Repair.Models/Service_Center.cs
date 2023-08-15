@@ -16,6 +16,8 @@ namespace Repair.Models
         private string loc_detail;
         private string tel;
         private string url;
+        private float longitude;
+        private float latitude;
 
         public static string GetName { get { return "SERVICE_CENTER"; } }
         public string ID
@@ -46,6 +48,17 @@ namespace Repair.Models
         {
             get { return url; }
             set { url = value; }
+        }
+
+        public float Latitude
+        {
+            get { return latitude; }
+            set { latitude = value; }
+        }
+        public float Longitude
+        {
+            get { return longitude; }
+            set { longitude = value; }
         }
         #endregion
     }
