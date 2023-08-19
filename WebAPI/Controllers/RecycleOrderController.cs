@@ -72,6 +72,7 @@ namespace WebAPI.Controllers
             else
             {
                 ret.Add("success", false);
+                ret.Add("Message", "缺少数据");
             }
             return ret;
         }
@@ -102,7 +103,7 @@ namespace WebAPI.Controllers
                 //Job = (JsonObject)(JsonObject.Parse(await stream.ReadToEndAsync()));
                 Job.Add("UserID", id);
                 Job.Add("OrderID", orderid);
-                Recycle_Order order= RecycleOrderServer.Query(orderid).FirstOrDefault();
+                Recycle_Order order = RecycleOrderServer.Query(orderid).FirstOrDefault();
                 order.ExpectedPrice = (float)Job["ExpectedPrice"];
                 order.Recycle_Location = Job["Recycle_Location"].ToString();
                 order.Recycle_Time = (DateTime)Job["Recycle_Time"];
@@ -116,6 +117,11 @@ namespace WebAPI.Controllers
                 {
                     ret.Add("success", false);
                 }
+            }
+            else
+            {
+                ret.Add("success", false);
+                ret.Add("Message", "缺少数据");
             }
             return ret;
         }

@@ -19,6 +19,7 @@ namespace Repair.Models
         private string identity;
         private string tel;
         private string email;
+        private float balance;
 
         private static string TABLE_NAME= "USERINFO";
         public static string GetName { get { return TABLE_NAME; } }
@@ -72,7 +73,12 @@ namespace Repair.Models
             get { return email; }
             set { email = value; }
         }
-        #endregion
 
+        public float Balance
+        {
+            get { return balance; }
+            set { balance = value; }
+        }
+        #endregion
     }
 }

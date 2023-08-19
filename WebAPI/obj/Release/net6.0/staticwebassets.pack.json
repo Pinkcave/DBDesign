@@ -33,12 +33,24 @@
       "PackagePath": "staticwebassets\\Image\\BeijingSC.jpg"
     },
     {
+      "Id": "D:\\新建文件夹\\DBDesign\\WebAPI\\wwwroot\\Image\\BeijingSC.png",
+      "PackagePath": "staticwebassets\\Image\\BeijingSC.png"
+    },
+    {
       "Id": "D:\\新建文件夹\\DBDesign\\WebAPI\\wwwroot\\Image\\ChengduSC.jpg",
       "PackagePath": "staticwebassets\\Image\\ChengduSC.jpg"
     },
     {
+      "Id": "D:\\新建文件夹\\DBDesign\\WebAPI\\wwwroot\\Image\\ChengduSC.png",
+      "PackagePath": "staticwebassets\\Image\\ChengduSC.png"
+    },
+    {
       "Id": "D:\\新建文件夹\\DBDesign\\WebAPI\\wwwroot\\Image\\HarbinSC.jpg",
       "PackagePath": "staticwebassets\\Image\\HarbinSC.jpg"
+    },
+    {
+      "Id": "D:\\新建文件夹\\DBDesign\\WebAPI\\wwwroot\\Image\\HarbinSC.png",
+      "PackagePath": "staticwebassets\\Image\\HarbinSC.png"
     },
     {
       "Id": "D:\\新建文件夹\\DBDesign\\WebAPI\\wwwroot\\Image\\K40(1).jpg",
@@ -129,12 +141,24 @@
       "PackagePath": "staticwebassets\\Image\\SanyaSC.jpg"
     },
     {
+      "Id": "D:\\新建文件夹\\DBDesign\\WebAPI\\wwwroot\\Image\\SanyaSC.png",
+      "PackagePath": "staticwebassets\\Image\\SanyaSC.png"
+    },
+    {
       "Id": "D:\\新建文件夹\\DBDesign\\WebAPI\\wwwroot\\Image\\ShanghaiSC.jpg",
       "PackagePath": "staticwebassets\\Image\\ShanghaiSC.jpg"
     },
     {
+      "Id": "D:\\新建文件夹\\DBDesign\\WebAPI\\wwwroot\\Image\\ShanghaiSC.png",
+      "PackagePath": "staticwebassets\\Image\\ShanghaiSC.png"
+    },
+    {
       "Id": "D:\\新建文件夹\\DBDesign\\WebAPI\\wwwroot\\Image\\ShenzhenSC.jpg",
       "PackagePath": "staticwebassets\\Image\\ShenzhenSC.jpg"
+    },
+    {
+      "Id": "D:\\新建文件夹\\DBDesign\\WebAPI\\wwwroot\\Image\\ShenzhenSC.png",
+      "PackagePath": "staticwebassets\\Image\\ShenzhenSC.png"
     },
     {
       "Id": "D:\\新建文件夹\\DBDesign\\WebAPI\\wwwroot\\Image\\Switch(1).jpg",
@@ -147,6 +171,10 @@
     {
       "Id": "D:\\新建文件夹\\DBDesign\\WebAPI\\wwwroot\\Image\\Switch.jpg",
       "PackagePath": "staticwebassets\\Image\\Switch.jpg"
+    },
+    {
+      "Id": "D:\\新建文件夹\\DBDesign\\WebAPI\\wwwroot\\Image\\demo.jpg",
+      "PackagePath": "staticwebassets\\Image\\demo.jpg"
     },
     {
       "Id": "D:\\新建文件夹\\DBDesign\\WebAPI\\wwwroot\\Image\\iPhone6(1).jpg",

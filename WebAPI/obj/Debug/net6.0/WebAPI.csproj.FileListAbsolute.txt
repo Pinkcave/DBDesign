@@ -87,7 +87,6 @@ D:\新建文件夹\DBDesign\WebAPI\bin\Debug\net6.0\runtimes\win\lib\net6.0\Syst
 D:\新建文件夹\DBDesign\WebAPI\bin\Debug\net6.0\runtimes\linux\lib\net6.0\System.DirectoryServices.Protocols.dll
 D:\新建文件夹\DBDesign\WebAPI\bin\Debug\net6.0\runtimes\osx\lib\net6.0\System.DirectoryServices.Protocols.dll
 D:\新建文件夹\DBDesign\WebAPI\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.DirectoryServices.Protocols.dll
-D:\新建文件夹\DBDesign\WebAPI\bin\Debug\net6.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
 D:\新建文件夹\DBDesign\WebAPI\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
 D:\新建文件夹\DBDesign\WebAPI\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 D:\新建文件夹\DBDesign\WebAPI\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll

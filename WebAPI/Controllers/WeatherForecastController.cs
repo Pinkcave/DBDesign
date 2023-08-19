@@ -3,12 +3,12 @@ using Microsoft.AspNetCore.Mvc.Formatters;
 using Repair.Models;
 using Repair.Server;
 using System.DirectoryServices.ActiveDirectory;
+using System.Drawing;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 
 namespace WebAPI.Controllers
 {
-
 
     [ApiController]
     [Route("[controller]")]
@@ -24,6 +24,29 @@ namespace WebAPI.Controllers
         public WeatherForecastController(ILogger<WeatherForecastController> logger)
         {
             _logger = logger;
+        }
+
+        public JsonObject ImageSave(string base64)
+        {
+            JsonObject ret = new JsonObject();
+            //string format = base64.Split(',')[0].Split(';')[0].Split('/')[1];
+            //base64 = base64.Replace("data:image/png;base64,", "").Replace("data:image/jpg;base64,", "").Replace("data:image/jpeg;base64,", "");
+            string format = "jpg";
+            byte[] ImageBytes = Convert.FromBase64String(base64);
+            MemoryStream mem = new MemoryStream(ImageBytes, 0, ImageBytes.Length);
+            mem.Write(ImageBytes, 0, ImageBytes.Length);
+            string path = "wwwroot/Image/demo." + format;
+            Image image = Image.FromStream(mem);
+            image.Save(path);
+            path = "http://110.42.220.245:8081/Image/demo." + format;
+            ret.Add("url", path);
+            return ret;
+        }
+        [HttpGet("ImageTest")]
+        public JsonObject EntryImage()
+        {
+            string base64 = Convert.ToBase64String(System.IO.File.ReadAllBytes("wwwroot/Image/BeijingSC.jpg"));
+            return ImageSave(base64);
         }
 
         [HttpGet]

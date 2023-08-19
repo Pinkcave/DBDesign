@@ -36,6 +36,7 @@ namespace WebAPI.Controllers
                 || !Job.ContainsKey("RepairLocation") || !Job.ContainsKey("RepairTime"))
             {
                 ret.Add("success", false);
+                ret.Add("Message", "缺少数据");
                 return ret;
             }
 
@@ -61,6 +62,7 @@ namespace WebAPI.Controllers
                 if (neworder.RepairOptionID == null)
                 {
                     ret.Add("success", false);
+                    ret.Add("Message", "用户或工程师不存在");
                     return ret;
                 }
                 row = RepairOrderServer.Insert(neworder);

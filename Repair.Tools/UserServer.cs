@@ -45,6 +45,7 @@ namespace Repair.Server
                     Object.Identity = reader.GetString(5);
                     Object.Telephone = reader.GetString(6);
                     Object.Email = reader.GetString(7);
+                    Object.Balance = reader.GetFloat(8);
                     userlist.Add(Object);
                 }
                 reader.Close();
@@ -84,7 +85,7 @@ namespace Repair.Server
             string sql = "update " + UserInfo.GetName + " set "
                          + "id=:new_USERID, username=:new_USERNAME, password=:new_PASSWORD,"
                          + "userlevel=:new_LEVEL, name=:new_NAME, identify=:new_IDENTITY,"
-                         + "telephone=:new_TELEPHONE, email=:new_EMAIL where id=\'" + old_id + "\'";
+                         + "telephone=:new_TELEPHONE, email=:new_EMAIL, balance=:new_BALANCE where id=\'" + old_id + "\'";
             OracleParameter[] param =
             {
                 new OracleParameter(":new_USERID", OracleDbType.Varchar2, user.UserId, ParameterDirection.Input),
@@ -94,12 +95,19 @@ namespace Repair.Server
                 new OracleParameter(":new_NAME", OracleDbType.Varchar2, user.Name, ParameterDirection.Input),
                 new OracleParameter(":new_IDENTITY", OracleDbType.Varchar2, user.Identity, ParameterDirection.Input),
                 new OracleParameter(":new_TELEPHONE",OracleDbType.Varchar2, user.Telephone, ParameterDirection.Input),
-                new OracleParameter(":new_EMAIL",OracleDbType.Varchar2, user.Email, ParameterDirection.Input)
+                new OracleParameter(":new_EMAIL",OracleDbType.Varchar2, user.Email, ParameterDirection.Input),
+                new OracleParameter(":new_BALANCE",OracleDbType.Double, user.Balance, ParameterDirection.Input)
             };
 
             int row = DBHelper.RunExecNonQuery(sql, param);
             return row;
         }
+        /*
+        public int BalanceManage(string uid,int newbalance)
+        {
+            string sql = string.Format("update userinfo set balance = {0} where id = {1}", newbalance, uid);
+            return DBHelper.RunExecNonQuery(sql, null);
+        }*/
 
         public static int Count()
         {

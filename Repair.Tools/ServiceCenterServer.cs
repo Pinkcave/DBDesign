@@ -22,6 +22,7 @@ namespace Repair.Server
             {
                 sql = "select * from " + Service_Center.GetName;
             }
+            sql += " order by id";
             List<Service_Center> list = new List<Service_Center>();
             using (OracleDataReader reader = DBHelper.GetDataReader(sql, null))
             {

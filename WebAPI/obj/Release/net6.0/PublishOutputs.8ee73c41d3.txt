@@ -26,7 +26,6 @@ D:\新建文件夹\DBDesign\WebAPI\obj\Release\net6.0\PubTmp\Out\runtimes\win\li
 D:\新建文件夹\DBDesign\WebAPI\obj\Release\net6.0\PubTmp\Out\runtimes\linux\lib\net6.0\System.DirectoryServices.Protocols.dll
 D:\新建文件夹\DBDesign\WebAPI\obj\Release\net6.0\PubTmp\Out\runtimes\osx\lib\net6.0\System.DirectoryServices.Protocols.dll
 D:\新建文件夹\DBDesign\WebAPI\obj\Release\net6.0\PubTmp\Out\runtimes\win\lib\net6.0\System.DirectoryServices.Protocols.dll
-D:\新建文件夹\DBDesign\WebAPI\obj\Release\net6.0\PubTmp\Out\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
 D:\新建文件夹\DBDesign\WebAPI\obj\Release\net6.0\PubTmp\Out\runtimes\win\lib\net6.0\System.Drawing.Common.dll
 D:\新建文件夹\DBDesign\WebAPI\obj\Release\net6.0\PubTmp\Out\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 D:\新建文件夹\DBDesign\WebAPI\obj\Release\net6.0\PubTmp\Out\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
