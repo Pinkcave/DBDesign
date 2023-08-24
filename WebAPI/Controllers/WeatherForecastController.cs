@@ -8,8 +8,7 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 
 namespace WebAPI.Controllers
-{
-
+{ 
     [ApiController]
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
@@ -32,21 +31,27 @@ namespace WebAPI.Controllers
             //string format = base64.Split(',')[0].Split(';')[0].Split('/')[1];
             //base64 = base64.Replace("data:image/png;base64,", "").Replace("data:image/jpg;base64,", "").Replace("data:image/jpeg;base64,", "");
             string format = "jpg";
-            byte[] ImageBytes = Convert.FromBase64String(base64);
-            MemoryStream mem = new MemoryStream(ImageBytes, 0, ImageBytes.Length);
-            mem.Write(ImageBytes, 0, ImageBytes.Length);
+            //byte[] ImageBytes = Convert.FromBase64String(base64);
+            MemoryStream mem = new MemoryStream(Convert.FromBase64String(base64));
+            //mem.Write(ImageBytes, 0, ImageBytes.Length);
             string path = "wwwroot/Image/demo." + format;
-            Image image = Image.FromStream(mem);
-            image.Save(path);
+            FileStream fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            byte[] MemBytes = mem.ToArray();
+            fs.Write(MemBytes, 0, MemBytes.Length);
+            //Image image = Image.FromStream(mem);
+            //image.Save(path);
             path = "http://110.42.220.245:8081/Image/demo." + format;
             ret.Add("url", path);
             return ret;
         }
         [HttpGet("ImageTest")]
-        public JsonObject EntryImage()
+        public JsonObject EntryImage([FromForm]string Json)
         {
-            string base64 = Convert.ToBase64String(System.IO.File.ReadAllBytes("wwwroot/Image/BeijingSC.jpg"));
-            return ImageSave(base64);
+           
+            string urlset = FileController.ToUrlSet("http://110.42.220.245:8081/Image/Airpods1", "jpg", 3);
+            JsonObject ret = new JsonObject();
+            ret.Add("ok", urlset);
+            return ret;
         }
 
         [HttpGet]
@@ -69,43 +74,13 @@ namespace WebAPI.Controllers
                     Summary = Summaries[Random.Shared.Next(Summaries.Length)]
                 });
             }
+
+
+            JsonObject ret = new JsonObject();
+            ret.Add("success", false);
+            ret.Clear();
+            ret.Add("success", true);
             
-            Repair_Order order = new Repair_Order();
-            Repair_Options options = new Repair_Options();
-            Repair_Cate cate = new Repair_Cate();
-            Coupon coupon = new Coupon();
-            coupon.Id = "001";
-            coupon.Name = "Discount";
-            coupon.Status = true;
-            cate.Name = "TBD";
-            cate.Image = "url";
-            cate.ID = "001";
-            cate.Detail = "details";
-            options.OptionID = "001";
-            options.CateName = cate.Name;
-            options.CateImage = cate.Image;
-            options.CateId = cate.ID;
-            options.RepairRequirement = "***";
-            options.RepairPrice = 100;
-            options.Brand = "Apple";
-            options.CateDetail = "***";
-            order.CouObj = coupon;
-            order.CouponID = coupon.Id;
-            order.OrderID = "001";
-            order.OrderStatus = 1;
-            order.CreateTime = DateTime.Now;
-            order.RepairLocation = "TBD";
-            order.EngineerID = "001";
-            order.RepairOptionID = options;
-            order.UserID = "123456";
-            order.UserRate = "5";
-            order.OrderPrice = 100;
-            order.RepairTime = DateTime.Now;
-            List<Repair_Order> orders = new List<Repair_Order>();
-            orders.Add(order);
-            JsonObject ret  = new JsonObject();
-            ret.Add("num", orders.Count);
-            ret.Add("orders",JsonObject.Parse(JsonSerializer.Serialize(order)));
             return ret;
         }
     

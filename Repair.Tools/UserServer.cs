@@ -58,8 +58,8 @@ namespace Repair.Server
             //UserInfo? user = JsonSerializer.Deserialize<UserInfo>(JsonInfo);
             if (user == null)
                 return -1;
-            string sql = "insert into "+ UserInfo.GetName + " values(" + "\'" + user.UserId + "\'," + "\'" + user.UserName + "\'," + "\'" + user.Password + "\'," + user.Level + ",\'" + user.Name + "\',"
-                + "\'" + user.Identity + "\'," + "\'" + user.Telephone + "\'," + "\'" + user.Email + "\')";
+            string sql = "insert into " + UserInfo.GetName + " values(" + "\'" + user.UserId + "\'," + "\'" + user.UserName + "\'," + "\'" + user.Password + "\'," + user.Level + ",\'" + user.Name + "\',"
+                + "\'" + user.Identity + "\'," + "\'" + user.Telephone + "\'," + "\'" + user.Email + "\'," + user.Balance + ")";
 
             int row = DBHelper.RunExecNonQuery(sql, null);
             return row;

@@ -28,8 +28,8 @@ namespace WebAPI.Controllers
             JsonObject ret = new JsonObject();
             if (Job.ContainsKey("Location_Name") && Job.ContainsKey("Loc_Detail"))
             {
-                Job.Add("id", ServiceLocServer.Count().ToString());
-                Job.Add("customerid", uid);
+                Job.Add("ID", ServiceLocServer.Count().ToString());
+                Job.Add("CustomerID", uid);
                 Service_Loc loc = JsonSerializer.Deserialize<Service_Loc>(Job);
                 int row = ServiceLocServer.Insert(loc);
                 if (row > 0)
@@ -53,10 +53,10 @@ namespace WebAPI.Controllers
         [HttpPost("{uid}/{id}")]
         public JsonObject ModifyLocation(string uid, string id, [FromBody] JsonObject Job)
         {
-            Job.Add("id", Guid.NewGuid().ToString().Replace("-", "").ToUpper());
-            Job.Add("customerid", uid);
+            Job.Add("ID", id);
+            Job.Add("CustomerID", uid);
             Service_Loc loc = JsonSerializer.Deserialize<Service_Loc>(Job);
-            int row = ServiceLocServer.Update(loc, uid);
+            int row = ServiceLocServer.Update(loc, id);
             JsonObject ret = new JsonObject();
             if (row > 0)
             {

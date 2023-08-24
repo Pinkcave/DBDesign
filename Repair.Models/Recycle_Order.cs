@@ -8,7 +8,7 @@ namespace Repair.Models
 {
     public class Recycle_Order
     {
-        public Recycle_Order() { }
+        public Recycle_Order() { Images = new List<string>(); }
         private static string TABLE_NAME = "RECYCLE_ORDER";
         public static string GetName { get { return TABLE_NAME; } }
         #region Model
@@ -54,6 +54,10 @@ namespace Repair.Models
             set { time = value; }
         }
 
+        public List<string> Images
+        {
+            get; set;
+        }
         #endregion
     }
 }

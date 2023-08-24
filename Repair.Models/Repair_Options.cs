@@ -16,7 +16,6 @@ namespace Repair.Models
         private string repairrequirement;
         private Repair_Cate repaircategoryid;
         private string brand;
-        private float repairprice;
 
         public string OptionID
         {
@@ -29,47 +28,16 @@ namespace Repair.Models
             get { return repairrequirement; }
             set { repairrequirement = value; }
         }
-
-        public string RepairCategoryID
+        public Repair_Cate RepairCategory
         {
-            get { return repaircategoryid.ID; }
-            set { repaircategoryid.ID = value; }
+            get { return repaircategoryid; }
+            set { repaircategoryid = value; }
         }
-
-        public string CateId
-        {
-            get { return repaircategoryid.ID; }
-            set { repaircategoryid.ID = value; }
-        }
-
-        public string CateName
-        {
-            get { return repaircategoryid.Name; }
-            set { repaircategoryid.Name = value; }
-        }
-
-        public string CateImage
-        {
-            get { return repaircategoryid.Image; }
-            set { repaircategoryid.Image = value; }
-        }
-
-        public string CateDetail
-        {
-            get { return repaircategoryid.Detail; }
-            set { repaircategoryid.Detail = value; }
-        }
-
+       
         public string Brand
         {
             get { return brand; }
             set { brand = value; }
-        }
-
-        public float RepairPrice
-        {
-            get { return repairprice; }
-            set { repairprice = value; }
         }
         #endregion
     }

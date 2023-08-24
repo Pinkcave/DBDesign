@@ -41,9 +41,9 @@ namespace Repair.Server
             return userlist;
         }
 
-        public static int Insert(string JsonInfo)
+        public static int Insert(Repair_Cate user)
         {
-            Repair_Cate? user = JsonSerializer.Deserialize<Repair_Cate>(JsonInfo);
+            //Repair_Cate? user = JsonSerializer.Deserialize<Repair_Cate>(JsonInfo);
             if (user == null)
                 return -1;
             string sql = "insert into " + Repair_Cate.GetName + " values("
@@ -87,6 +87,18 @@ namespace Repair.Server
 
             int row = DBHelper.RunExecNonQuery(sql, param);
             return row;
+        }
+
+        public static int Count()
+        {
+            string sql = "select tablecount from counter where tablename = \'REPAIR_CATE\'";
+            int ret = -1;
+            using (OracleDataReader reader = DBHelper.GetDataReader(sql, null))
+            {
+                reader.Read();
+                ret = reader.GetInt32(0);
+            }
+            return ret;
         }
     }
 }

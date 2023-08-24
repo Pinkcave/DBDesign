@@ -173,10 +173,6 @@
       "PackagePath": "staticwebassets\\Image\\Switch.jpg"
     },
     {
-      "Id": "D:\\新建文件夹\\DBDesign\\WebAPI\\wwwroot\\Image\\demo.jpg",
-      "PackagePath": "staticwebassets\\Image\\demo.jpg"
-    },
-    {
       "Id": "D:\\新建文件夹\\DBDesign\\WebAPI\\wwwroot\\Image\\iPhone6(1).jpg",
       "PackagePath": "staticwebassets\\Image\\iPhone6(1).jpg"
     },
@@ -231,6 +227,22 @@
     {
       "Id": "D:\\新建文件夹\\DBDesign\\WebAPI\\wwwroot\\Image\\verifycode_all.png",
       "PackagePath": "staticwebassets\\Image\\verifycode_all.png"
+    },
+    {
+      "Id": "D:\\新建文件夹\\DBDesign\\WebAPI\\wwwroot\\RecycleImage\\10012(0).jpg",
+      "PackagePath": "staticwebassets\\RecycleImage\\10012(0).jpg"
+    },
+    {
+      "Id": "D:\\新建文件夹\\DBDesign\\WebAPI\\wwwroot\\RecycleImage\\10012(1).jpg",
+      "PackagePath": "staticwebassets\\RecycleImage\\10012(1).jpg"
+    },
+    {
+      "Id": "D:\\新建文件夹\\DBDesign\\WebAPI\\wwwroot\\RepairImage\\10014(0).jpg",
+      "PackagePath": "staticwebassets\\RepairImage\\10014(0).jpg"
+    },
+    {
+      "Id": "D:\\新建文件夹\\DBDesign\\WebAPI\\wwwroot\\RepairImage\\10014(1).jpg",
+      "PackagePath": "staticwebassets\\RepairImage\\10014(1).jpg"
     },
     {
       "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.WebAPI.Microsoft.AspNetCore.StaticWebAssets.props",

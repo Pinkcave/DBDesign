@@ -22,7 +22,7 @@ namespace WebAPI.Controllers
                 Job.Add("UserId", id.ToString());
                 Job.Add("Level", 1);
                 UserInfo user = JsonSerializer.Deserialize<UserInfo>(Job);
-
+                user.Balance = 0;
                 row = UserServer.Insert(user);
                 if (row == 1)
                 {

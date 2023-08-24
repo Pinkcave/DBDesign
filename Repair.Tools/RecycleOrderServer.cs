@@ -36,6 +36,7 @@ namespace Repair.Server
                     Object.ExpectedPrice = reader.GetFloat(3);
                     Object.Recycle_Location = reader.GetString(4);
                     Object.Recycle_Time = reader.GetDateTime(5);
+                    Object.Images = reader.IsDBNull(6) ? null : JsonSerializer.Deserialize<List<string>>(reader.GetString(6));
                     list.Add(Object);
                 }
                 reader.Close();
@@ -61,6 +62,8 @@ namespace Repair.Server
                     Object.ExpectedPrice = reader.GetFloat(3);
                     Object.Recycle_Location = reader.GetString(4);
                     Object.Recycle_Time = reader.GetDateTime(5);
+                    Object.Images = reader.IsDBNull(6) ? null : JsonSerializer.Deserialize<List<string>>(reader.GetString(6));
+                    list.Add(Object);
                 }
                 reader.Close();
             }
@@ -74,7 +77,8 @@ namespace Repair.Server
                 return -1;
             //string sql = "insert into " + Recycle_Order.GetName + " values(" + "\'" + order.OrderID + "\'," + "\'" + order.Device.DeviceID + "\'," + "\'" + order.UserID + "\'," + order.ExpectedPrice + ",\'" + order.Recycle_Location + "\',"
              //   + order.Recycle_Time + ")";
-            string sql = string.Format("insert into {0} values(\'{1}\',\'{2}\',\'{3}\',{4},\'{5}\',to_date(\'{6}\',\'MM/DD/YYYY HH24:MI:SS\'))", Recycle_Order.GetName, order.OrderID, order.Device.DeviceID, order.UserID, order.ExpectedPrice, order.Recycle_Location, order.Recycle_Time);
+            string sql = string.Format("insert into {0} values(\'{1}\',\'{2}\',\'{3}\',{4},\'{5}\',to_date(\'{6}\',\'MM/DD/YYYY HH24:MI:SS\'),{7})", Recycle_Order.GetName, order.OrderID, order.Device.DeviceID, order.UserID, order.ExpectedPrice, order.Recycle_Location, order.Recycle_Time,FileHelper.UrlListToSet(order.Images));
+            //string sql = string.Format("insert into {0} values(\'{1}\',\'{2}\',\'{3}\',{4},\'{5}\',to_date(\'{6}\',\'YYYY/MM/DD HH24:MI:SS\'),{7})", Recycle_Order.GetName, order.OrderID, order.Device.DeviceID, order.UserID, order.ExpectedPrice, order.Recycle_Location, order.Recycle_Time, FileHelper.UrlListToSet(order.Images));
             int row = DBHelper.RunExecNonQuery(sql, null);
             return row;
         }
@@ -98,7 +102,8 @@ namespace Repair.Server
                 return -1;
             string sql = "update " + Recycle_Order.GetName + " set "
                          + "OrderID=:new_OrderID, DeviceID=:new_DeviceID, UserID=:new_UserID,"
-                         + "ExpectedPrice=:new_Price, Recycle_Location=:new_Loc, Recycle_Time=:new_Time"
+                         + "ExpectedPrice=:new_Price, Recycle_Location=:new_Loc, Recycle_Time=:new_Time, "
+                         + "image_url=" + FileHelper.UrlListToSet(order.Images)
                          + " where orderid=\'" + old_id + "\'";
             OracleParameter[] param =
             {

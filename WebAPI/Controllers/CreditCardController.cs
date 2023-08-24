@@ -68,6 +68,16 @@ namespace WebAPI.Controllers
             return ret;
         }
 
+        [HttpGet("DefaultCard/{uid}")]
+        public JsonObject GetDefaultCard(string uid) 
+        {
+            JsonObject ret = new JsonObject();
+            CreditCard card = CreditCardServer.GetDefaultCard(uid);
+            ret.Add("userid", uid);
+            ret.Add("default",JsonObject.Parse(JsonSerializer.Serialize(card)));
+            return ret;
+        }
+
         [HttpPost("DefaultCard/{uid}")]
         public JsonObject DefaultCard(string uid, [FromQuery]string cardid)
         {

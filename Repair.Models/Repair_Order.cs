@@ -8,7 +8,7 @@ namespace Repair.Models
 {
     public class Repair_Order
     {
-        public Repair_Order() { couponid = new Coupon(); couponid.Id = "<null>"; }
+        public Repair_Order() { couponid = new Coupon(); couponid.Id = "<null>"; Images = new List<string>(); }
         private static string TABLE_NAME = "REPAIR_ORDER";
         public static string GetName { get { return TABLE_NAME; } }
         #region Model
@@ -94,6 +94,11 @@ namespace Repair.Models
         {
             get { return orderstatus; }
             set { orderstatus = value; }
+        }
+
+        public List<string> Images
+        {
+            get;set;
         }
         #endregion
     }
