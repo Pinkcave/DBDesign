@@ -9,7 +9,7 @@ namespace Repair.Models
     public class CustomerService
     {
         public CustomerService() { }
-        private static string TABLE_NAME = "CUSTOMERSERVICE";
+        private static string TABLE_NAME = "CUSTOMER_SERVICE";
         public static string GetName { get { return TABLE_NAME; } }
         #region Model
         private string id;

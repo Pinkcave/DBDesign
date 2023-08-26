@@ -10,12 +10,14 @@ namespace WebAPI.Controllers
     [Route("[controller]")]
     public class AboutUsController : Controller
     {
-        [HttpGet("CustomerService")]
-        public IEnumerable<CustomerService> GetUserInfo()
+        [HttpGet]
+        public JsonObject GetAboutUs()
         {
-            List<CustomerService> customerServices = CustomerServiceServer.Query();
-            //Console.WriteLine(uid);
-            return customerServices;
+            List<AboutUs> types = AboutUsServer.Query();
+            JsonObject ret = new JsonObject();
+            ret.Add("num", types.Count);
+            ret.Add("about_us", JsonObject.Parse(JsonSerializer.Serialize(types)));
+            return ret;
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Text.Json.Nodes;
+using System.Text.Json;
+using Microsoft.AspNetCore.Mvc;
 using Repair.Models;
 using Repair.Server;
 
@@ -8,12 +10,14 @@ namespace WebAPI.Controllers
     [Route("[controller]")]
     public class CustomerServiceController : Controller
     {
-        [HttpGet("AboutUs")]
-        public IEnumerable<AboutUs> GetUserInfo()
+        [HttpGet]
+        public JsonObject GetCustomerService()
         {
-            List<AboutUs> aboutUs = AboutUsServer.Query();
-            //Console.WriteLine(uid);
-            return aboutUs;
+            List<CustomerService> types = CustomerServiceServer.Query();
+            JsonObject ret = new JsonObject();
+            ret.Add("num", types.Count);
+            ret.Add("about_us", JsonObject.Parse(JsonSerializer.Serialize(types)));
+            return ret;
         }
     }
 }

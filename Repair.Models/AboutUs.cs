@@ -9,7 +9,7 @@ namespace Repair.Models
     public class AboutUs
     {
         public AboutUs() { }
-        private static string TABLE_NAME = "ABOUTUS";
+        private static string TABLE_NAME = "ABOUT_US";
         public static string GetName { get { return TABLE_NAME; } }
         #region
         private string id;
