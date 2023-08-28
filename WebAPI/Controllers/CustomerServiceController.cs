@@ -16,7 +16,7 @@ namespace WebAPI.Controllers
             List<CustomerService> types = CustomerServiceServer.Query();
             JsonObject ret = new JsonObject();
             ret.Add("num", types.Count);
-            ret.Add("about_us", JsonObject.Parse(JsonSerializer.Serialize(types)));
+            ret.Add("customer_service", JsonObject.Parse(JsonSerializer.Serialize(types)));
             return ret;
         }
     }

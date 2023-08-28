@@ -1,0 +1,7 @@
+E:\大二下\数据库\小学期\DBDesign\Repair.Models\bin\Debug\net6.0\publish\Repair.Models.dll
+E:\大二下\数据库\小学期\DBDesign\Repair.Models\bin\Debug\net6.0\publish\Repair.Models.deps.json
+E:\大二下\数据库\小学期\DBDesign\Repair.Models\bin\Debug\net6.0\publish\Repair.Models.pdb
+E:\大二下\数据库\小学期\DBDesign\Repair.Models\bin\Debug\net6.0\publish\Microsoft.Win32.SystemEvents.dll
+E:\大二下\数据库\小学期\DBDesign\Repair.Models\bin\Debug\net6.0\publish\System.Drawing.Common.dll
+E:\大二下\数据库\小学期\DBDesign\Repair.Models\bin\Debug\net6.0\publish\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
+E:\大二下\数据库\小学期\DBDesign\Repair.Models\bin\Debug\net6.0\publish\runtimes\win\lib\net6.0\System.Drawing.Common.dll

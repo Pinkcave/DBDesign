@@ -53,19 +53,28 @@ namespace WebAPI.Controllers
         [HttpPost("{uid}/{id}")]
         public JsonObject ModifyLocation(string uid, string id, [FromBody] JsonObject Job)
         {
-            Job.Add("ID", id);
-            Job.Add("CustomerID", uid);
-            Service_Loc loc = JsonSerializer.Deserialize<Service_Loc>(Job);
-            int row = ServiceLocServer.Update(loc, id);
             JsonObject ret = new JsonObject();
-            if (row > 0)
+            if(Job.ContainsKey("Location_Name") && Job.ContainsKey("Loc_Detail"))
             {
-                ret.Add("success", true);
-                ret.Add("Loc_Detail", Job);
+                Job.Add("ID", id);
+                Job.Add("CustomerID", uid);
+                Service_Loc loc = JsonSerializer.Deserialize<Service_Loc>(Job);
+                int row = ServiceLocServer.Update(loc, id);
+
+                if (row > 0)
+                {
+                    ret.Add("success", true);
+                    ret.Add("Loc_Detail", Job);
+                }
+                else
+                {
+                    ret.Add("success", false);
+                }
             }
             else
             {
                 ret.Add("success", false);
+                ret.Add("Message", "缺少数据");
             }
             return ret;
         }

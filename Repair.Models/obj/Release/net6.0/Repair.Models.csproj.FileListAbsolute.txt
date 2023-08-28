@@ -10,3 +10,15 @@ D:\新建文件夹\DBDesign\Repair.Models\obj\Release\net6.0\Repair.Models.dll
 D:\新建文件夹\DBDesign\Repair.Models\obj\Release\net6.0\refint\Repair.Models.dll
 D:\新建文件夹\DBDesign\Repair.Models\obj\Release\net6.0\Repair.Models.pdb
 D:\新建文件夹\DBDesign\Repair.Models\obj\Release\net6.0\ref\Repair.Models.dll
+E:\大二下\数据库\小学期\DBDesign\Repair.Models\bin\Release\net6.0\Repair.Models.deps.json
+E:\大二下\数据库\小学期\DBDesign\Repair.Models\bin\Release\net6.0\Repair.Models.dll
+E:\大二下\数据库\小学期\DBDesign\Repair.Models\bin\Release\net6.0\Repair.Models.pdb
+E:\大二下\数据库\小学期\DBDesign\Repair.Models\obj\Release\net6.0\Repair.Models.csproj.AssemblyReference.cache
+E:\大二下\数据库\小学期\DBDesign\Repair.Models\obj\Release\net6.0\Repair.Models.GeneratedMSBuildEditorConfig.editorconfig
+E:\大二下\数据库\小学期\DBDesign\Repair.Models\obj\Release\net6.0\Repair.Models.AssemblyInfoInputs.cache
+E:\大二下\数据库\小学期\DBDesign\Repair.Models\obj\Release\net6.0\Repair.Models.AssemblyInfo.cs
+E:\大二下\数据库\小学期\DBDesign\Repair.Models\obj\Release\net6.0\Repair.Models.csproj.CoreCompileInputs.cache
+E:\大二下\数据库\小学期\DBDesign\Repair.Models\obj\Release\net6.0\Repair.Models.dll
+E:\大二下\数据库\小学期\DBDesign\Repair.Models\obj\Release\net6.0\refint\Repair.Models.dll
+E:\大二下\数据库\小学期\DBDesign\Repair.Models\obj\Release\net6.0\Repair.Models.pdb
+E:\大二下\数据库\小学期\DBDesign\Repair.Models\obj\Release\net6.0\ref\Repair.Models.dll
