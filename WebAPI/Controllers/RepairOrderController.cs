@@ -234,10 +234,14 @@ namespace WebAPI.Controllers
                 return ret;
             }
 
-            foreach(var url in order.Images)
+            if(order.Images != null)
             {
-                FileHelper.DeleteFile(url.Replace("http://110.42.220.245:8081", "wwwroot"));
+                foreach (var url in order.Images)
+                {
+                    FileHelper.DeleteFile(url.Replace("http://110.42.220.245:8081", "wwwroot"));
+                }
             }
+            
 
             ret.Add("success", true);
             return ret;

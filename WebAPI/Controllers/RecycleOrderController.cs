@@ -139,22 +139,35 @@ namespace WebAPI.Controllers
             JsonObject ret = new JsonObject();
             Recycle_Order order = RecycleOrderServer.Query(orderid).FirstOrDefault();
 
-            if (RecycleOrderServer.Delete(orderid) > 0)
+            if(order == null)
             {
-                if (DeviceServer.Delete(order.Device.DeviceID) > 0)
-                {
-                    ret.Add("success", true);
-                    return ret;
-                }
-                    
-            }
-            //delete files
-            foreach (var url in order.Images)
-            {
-                FileHelper.DeleteFile(url.Replace("http://110.42.220.245:8081", "wwwroot"));
+                ret.Add("success", false);
+                ret.Add("Message", "不存在订单");
+                return ret;
             }
 
-            ret.Add("success", false);
+            if (RecycleOrderServer.Delete(orderid) <= 0)
+            {
+                ret.Add("success", false);
+                return ret;
+            }
+
+            if (DeviceServer.Delete(order.Device.DeviceID) <= 0)
+            {
+                ret.Add("success", false);
+                return ret;
+            }
+
+            //delete files
+            if (order.Images != null)
+            {
+                foreach (var url in order.Images)
+                {
+                    FileHelper.DeleteFile(url.Replace("http://110.42.220.245:8081", "wwwroot"));
+                }
+            }
+
+            ret.Add("success", true);
             return ret;
         }
         /*
