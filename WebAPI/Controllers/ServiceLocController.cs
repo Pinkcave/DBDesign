@@ -78,5 +78,29 @@ namespace WebAPI.Controllers
             }
             return ret;
         }
+
+        [HttpDelete("{id}")]
+        public JsonObject DeleteServiceLoc(string id)
+        {
+            JsonObject ret = new JsonObject();
+            List<Service_Loc> loc = ServiceLocServer.Query(id);
+            if (loc.Equals(null))
+            {
+                ret.Add("success", false);
+                ret.Add("Message", "服务地址不存在");
+                return ret;
+            }
+
+            if (ServiceLocServer.Delete(id) <= 0)
+            {
+                ret.Add("success", false);
+            }
+            else
+            {
+                ret.Add("success", true);
+            }
+
+            return ret;
+        }
     }
 }
