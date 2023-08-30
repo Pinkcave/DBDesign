@@ -42,8 +42,9 @@ namespace Repair.Server
                     Object.RepairTime = reader.GetDateTime(8);
                     Object.UserRate = reader.IsDBNull(9) ? null : reader.GetString(9);
                     Object.OrderStatus = reader.GetInt32(10);
-                    Object.Images = JsonSerializer.Deserialize<List<string>>(reader.GetString(11));
-
+                    Object.Images = (reader.IsDBNull(11) ? 
+                        null : 
+                        JsonSerializer.Deserialize<List<string>>(reader.GetString(11)));
                     string InnerSql = "select * from COUPON where id=\'" + Object.CouponID + "\'";
                     using (OracleDataReader InnerReader = DBHelper.GetDataReader(InnerSql, null))
                     {
