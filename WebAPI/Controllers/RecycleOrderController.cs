@@ -83,9 +83,74 @@ namespace WebAPI.Controllers
         {
             JsonObject Job = (JsonObject)JsonObject.Parse(Json);
             JsonObject ret = new JsonObject();
-            if (Request != null && UserServer.Query(id).Count != 0
+            bool right = true;
+            if (Request == null)
+            {
+                if (right)
+                {
+                    ret.Add("success", false);
+                    right = false;
+                }
+                ret.Add("RequestError", "null request");
+            }
+            if (UserServer.Query(id).Count == 0)
+            {
+                if (right)
+                {
+                    ret.Add("success", false);
+                    right = false;
+                }
+                ret.Add("UserError", "null user");
+            }
+            if (!Job.ContainsKey("Device_Cate"))
+            {
+                if (right)
+                {
+                    ret.Add("success", false);
+                    right = false;
+                }
+                ret.Add("CateError", "缺少Device_Cate");
+            }
+            if (!Job.ContainsKey("Device_Type"))
+            {
+                if (right)
+                {
+                    ret.Add("success", false);
+                    right = false;
+                }
+                ret.Add("TypeError", "缺少Device_Type");
+            }
+            if (!Job.ContainsKey("ExpectedPrice"))
+            {
+                if (right)
+                {
+                    ret.Add("success", false);
+                    right = false;
+                }
+                ret.Add("PriceError", "缺少ExpectedPrice");
+            }
+            if (!Job.ContainsKey("Recycle_Location"))
+            {
+                if (right)
+                {
+                    ret.Add("success", false);
+                    right = false;
+                }
+                ret.Add("LocError", "缺少Recycle_Location");
+            }
+            if (!Job.ContainsKey("Recycle_Time"))
+            {
+                if (right)
+                {
+                    ret.Add("success", false);
+                    right = false;
+                }
+                ret.Add("TimeError", "缺少Recycle_Time");
+            }
+
+            if (/*Request != null && UserServer.Query(id).Count != 0
                 && Job.ContainsKey("Device_Cate") && Job.ContainsKey("Device_Type")
-                && Job.ContainsKey("ExpectedPrice") && Job.ContainsKey("Recycle_Location") && Job.ContainsKey("Recycle_Time"))
+                && Job.ContainsKey("ExpectedPrice") && Job.ContainsKey("Recycle_Location") && Job.ContainsKey("Recycle_Time")*/right)
             {
                 //JsonObject Job = (JsonObject)(JsonObject.Parse(await stream.ReadToEndAsync()));
                 Job.Add("UserID", id);
@@ -121,12 +186,13 @@ namespace WebAPI.Controllers
                 else
                 {
                     ret.Add("success", false);
+                    ret.Add("Message", "DB未能成功插入");
                 }
 
             }
             else
             {
-                ret.Add("success", false);
+                // ret.Add("success", false);
                 ret.Add("Message", "缺少数据");
             }
             return ret;
