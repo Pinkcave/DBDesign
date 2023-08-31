@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "i0hxaiPmQvTQuszRR3itDU0NmMVkbCQXZUuJb890m38=",
+  "Hash": "pzF+dfR7gs97J4j3GRECWpXFJY2I6mSXgUtINfRF5s8=",
   "Source": "WebAPI",
   "BasePath": "_content/WebAPI",
   "Mode": "Default",
@@ -1018,6 +1018,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\RecycleImage\\10012(1).jpg"
+    },
+    {
+      "Identity": "D:\\新建文件夹\\DBDesign\\WebAPI\\wwwroot\\RecycleImage\\10013(0).jpg",
+      "SourceId": "WebAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\新建文件夹\\DBDesign\\WebAPI\\wwwroot\\",
+      "BasePath": "_content/WebAPI",
+      "RelativePath": "RecycleImage/10013(0).jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\RecycleImage\\10013(0).jpg"
+    },
+    {
+      "Identity": "D:\\新建文件夹\\DBDesign\\WebAPI\\wwwroot\\RecycleImage\\10013(1).jpg",
+      "SourceId": "WebAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\新建文件夹\\DBDesign\\WebAPI\\wwwroot\\",
+      "BasePath": "_content/WebAPI",
+      "RelativePath": "RecycleImage/10013(1).jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\RecycleImage\\10013(1).jpg"
     },
     {
       "Identity": "D:\\新建文件夹\\DBDesign\\WebAPI\\wwwroot\\RepairImage\\10016(0).jpg",

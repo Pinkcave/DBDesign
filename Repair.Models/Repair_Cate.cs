@@ -16,6 +16,7 @@ namespace Repair.Models
         private string name;
         private string image;
         private string detail;
+        private string? description;
 
         public string ID
         {
@@ -39,6 +40,12 @@ namespace Repair.Models
         {
             get { return detail; }
             set { detail = value; }
+        }
+
+        public string? Description
+        {
+            get { return description; }
+            set { description = value; }
         }
 
         #endregion

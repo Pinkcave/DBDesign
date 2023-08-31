@@ -34,6 +34,7 @@ namespace Repair.Server
                     Object.RepairRequirement = reader.GetString(1);
                     Object.RepairCategory = RepairCateServer.Query(reader.GetString(2)).FirstOrDefault();
                     Object.Brand = reader.GetString(3);
+                    Object.isWarranty = reader.GetString(4);
 
                     /*
                     //内嵌repair_category对象
@@ -62,7 +63,8 @@ namespace Repair.Server
                             + "\'" + user.OptionID + "\',"
                             + "\'" + user.RepairRequirement + "\',"
                             + "\'" + user.RepairCategory.ID + "\',"
-                            + "\'" + user.Brand + "\'" + ")";
+                            + "\'" + user.Brand + "\',"
+                            + "\'" + user.isWarranty + "\'" + ")";
 
             int row = DBHelper.RunExecNonQuery(sql, null);
             return row;
@@ -87,7 +89,7 @@ namespace Repair.Server
                 return -1;
             string sql = "update " + Repair_Options.GetName + " set "
                          + "optionid=:new_OPTIONID, repairrequirement=:new_REPAIR, repaircategoryid=:new_CATEID,"
-                         + "brand=:new_BRAND "
+                         + "brand=:new_BRAND, isWarranty=:new_WARRANTY"
                          + "where optionid=\'" + old_id + "\'";
             OracleParameter[] param =
             {
@@ -95,6 +97,7 @@ namespace Repair.Server
                 new OracleParameter(":new_REQUIRE", OracleDbType.Varchar2, user.RepairRequirement, ParameterDirection.Input),
                 new OracleParameter(":new_CATEID", OracleDbType.Varchar2, user.RepairCategory.ID, ParameterDirection.Input),
                 new OracleParameter(":new_BRAND", OracleDbType.Varchar2, user.Brand, ParameterDirection.Input),
+                new OracleParameter(":new_WARRANTY", OracleDbType.Varchar2, user.Brand, ParameterDirection.Input)
             };
 
             int row = DBHelper.RunExecNonQuery(sql, param);

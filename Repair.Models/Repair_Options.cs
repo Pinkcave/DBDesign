@@ -16,6 +16,7 @@ namespace Repair.Models
         private string repairrequirement;
         private Repair_Cate repaircategoryid;
         private string brand;
+        private string warranty;
 
         public string OptionID
         {
@@ -38,6 +39,12 @@ namespace Repair.Models
         {
             get { return brand; }
             set { brand = value; }
+        }
+
+        public string isWarranty
+        {
+            get { return warranty; }
+            set { warranty = value; }
         }
         #endregion
     }
