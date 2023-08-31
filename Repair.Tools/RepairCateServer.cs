@@ -34,6 +34,7 @@ namespace Repair.Server
                     Object.Name = reader.GetString(1);
                     Object.Image = reader.GetString(2);
                     Object.Detail = reader.GetString(3);
+                    Object.Description = reader.IsDBNull(4) ? null : reader.GetString(4);
                     userlist.Add(Object);
                 }
                 reader.Close();
@@ -50,7 +51,9 @@ namespace Repair.Server
                             + "\'" + user.ID + "\',"
                             + "\'" + user.Name + "\',"
                             + "\'" + user.Image + "\',"
-                            + "\'" + user.Detail + "\')";
+                            + "\'" + user.Detail + "\',"
+                            + (user.Description == null ? "null" : "\'" + user.Description + "\'") 
+                            + ")";
 
             int row = DBHelper.RunExecNonQuery(sql, null);
             return row;
@@ -75,14 +78,16 @@ namespace Repair.Server
                 return -1;
             string sql = "update " + Repair_Cate.GetName + " set "
                          + "id=:new_ID, name=:new_NAME,"
-                         + "image=:new_IMAGE, detail=:new_DETAIL "
+                         + "image=:new_IMAGE, detail=:new_DETAIL, "
+                         +"description=:new_DESCRIPTION "
                          + "where id=\'" + old_id + "\'";
             OracleParameter[] param =
             {
                 new OracleParameter(":new_ID", OracleDbType.Varchar2, user.ID, ParameterDirection.Input),
                 new OracleParameter(":new_NAME", OracleDbType.Varchar2, user.Name, ParameterDirection.Input),
                 new OracleParameter(":new_IMAGE", OracleDbType.Varchar2, user.Image, ParameterDirection.Input),
-                new OracleParameter(":new_DETAIL",OracleDbType.Varchar2, user.Detail, ParameterDirection.Input)
+                new OracleParameter(":new_DETAIL",OracleDbType.Varchar2, user.Detail, ParameterDirection.Input),
+                new OracleParameter(":new_DESCRIPTION",OracleDbType.Varchar2, user.Description, ParameterDirection.Input)
             };
 
             int row = DBHelper.RunExecNonQuery(sql, param);

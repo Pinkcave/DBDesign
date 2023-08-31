@@ -117,7 +117,7 @@ namespace WebAPI.Controllers
             JsonObject ret = new JsonObject();
             if (Request.Body == null || !Job.ContainsKey("CouponID") || !Job.ContainsKey("EngineerID")
                 || !Job.ContainsKey("OrderPrice") || !Job.ContainsKey("ProblemPart") || !Job.ContainsKey("ProblemDetail")
-                || !Job.ContainsKey("Requirement") || !Job.ContainsKey("Brand")
+                || !Job.ContainsKey("Requirement") || !Job.ContainsKey("Brand")||!Job.ContainsKey("isWarranty")
                 || !Job.ContainsKey("RepairLocation") || !Job.ContainsKey("RepairTime"))
             {
                 ret.Add("success", false);
@@ -143,6 +143,14 @@ namespace WebAPI.Controllers
                 cate.Name = Job["ProblemPart"].ToString();
                 cate.Detail = Job["ProblemDetail"].ToString();
                 cate.Image = "null";
+                if (Job.ContainsKey("problemDescription") && Job["problemDescription"]!=null)
+                {
+                    cate.Description = Job["problemDescription"].ToString();
+                }
+                else
+                {
+                    cate.Description = null;
+                }
                 
                 //create repair_option
                 Repair_Options opt = new Repair_Options();
@@ -150,7 +158,7 @@ namespace WebAPI.Controllers
                 opt.RepairCategory = cate;
                 opt.RepairRequirement = Job["Requirement"].ToString();
                 opt.Brand = Job["Brand"].ToString();
-                
+                opt.isWarranty = Job["isWarranty"].ToString();
 
                 //create order
                 Job.Add("UserID", uid);

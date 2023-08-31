@@ -599,19 +599,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\86138\\.nuget\\packages\\": {}
+    "C:\\Users\\大十一\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\大二下\\数据库\\小学期\\DBDesign\\Repair.Helper\\Repair.Helper.csproj",
+      "projectUniqueName": "D:\\新建文件夹\\DBDesign\\Repair.Helper\\Repair.Helper.csproj",
       "projectName": "Repair.Helper",
-      "projectPath": "E:\\大二下\\数据库\\小学期\\DBDesign\\Repair.Helper\\Repair.Helper.csproj",
-      "packagesPath": "C:\\Users\\86138\\.nuget\\packages\\",
-      "outputPath": "E:\\大二下\\数据库\\小学期\\DBDesign\\Repair.Helper\\obj\\",
+      "projectPath": "D:\\新建文件夹\\DBDesign\\Repair.Helper\\Repair.Helper.csproj",
+      "packagesPath": "C:\\Users\\大十一\\.nuget\\packages\\",
+      "outputPath": "D:\\新建文件夹\\DBDesign\\Repair.Helper\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\86138\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\大十一\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -625,8 +625,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "E:\\大二下\\数据库\\小学期\\DBDesign\\Repair.Models\\Repair.Models.csproj": {
-              "projectPath": "E:\\大二下\\数据库\\小学期\\DBDesign\\Repair.Models\\Repair.Models.csproj"
+            "D:\\新建文件夹\\DBDesign\\Repair.Models\\Repair.Models.csproj": {
+              "projectPath": "D:\\新建文件夹\\DBDesign\\Repair.Models\\Repair.Models.csproj"
             }
           }
         }
@@ -666,7 +666,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
       }
     }
   }
