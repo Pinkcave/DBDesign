@@ -147,7 +147,15 @@ namespace WebAPI.Controllers
                 }
                 ret.Add("TimeError", "缺少Recycle_Time");
             }
-
+            if (!Job.ContainsKey("Customer_Location"))
+            {
+                if (right)
+                {
+                    ret.Add("success", false);
+                    right = false;
+                }
+                ret.Add("CustomerLocationError", "缺少Customer_Location");
+            }
             if (/*Request != null && UserServer.Query(id).Count != 0
                 && Job.ContainsKey("Device_Cate") && Job.ContainsKey("Device_Type")
                 && Job.ContainsKey("ExpectedPrice") && Job.ContainsKey("Recycle_Location") && Job.ContainsKey("Recycle_Time")*/right)
@@ -276,7 +284,7 @@ namespace WebAPI.Controllers
             JsonObject Job = (JsonObject)JsonObject.Parse(Json);
             JsonObject ret = new JsonObject();
             if (Request != null && UserServer.Query(id).Count != 0 && RecycleOrderServer.Query(orderid).Count != 0
-                && Job.ContainsKey("ExpectedPrice") && Job.ContainsKey("Recycle_Location") && Job.ContainsKey("Recycle_Time"))
+                && Job.ContainsKey("ExpectedPrice") && Job.ContainsKey("Recycle_Location") && Job.ContainsKey("Recycle_Time") && Job.ContainsKey("Customer_Location"))
             {
                 //Job = (JsonObject)(JsonObject.Parse(await stream.ReadToEndAsync()));
                 Job.Add("UserID", id);
@@ -285,6 +293,7 @@ namespace WebAPI.Controllers
                 order.ExpectedPrice = (float)Job["ExpectedPrice"];
                 order.Recycle_Location = Job["Recycle_Location"].ToString();
                 order.Recycle_Time = (DateTime)Job["Recycle_Time"];
+                order.CustomerLocation = Job["Customer_Location"].ToString();
                 //Update Files
                 var files = Request.Form.Files;
                 if (files.Count > 0)

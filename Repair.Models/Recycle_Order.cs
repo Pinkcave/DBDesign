@@ -17,6 +17,7 @@ namespace Repair.Models
         private string userid;
         private float expectedprice;
         private string location;
+        private string customer_location;
         private DateTime time;
 
         public string OrderID
@@ -57,6 +58,12 @@ namespace Repair.Models
         public List<string> Images
         {
             get; set;
+        }
+
+        public string CustomerLocation
+        {
+            get { return customer_location; }
+            set { customer_location = value; }
         }
         #endregion
     }
