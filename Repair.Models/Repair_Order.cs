@@ -23,6 +23,7 @@ namespace Repair.Models
         private DateTime repairtime;
         private string? userrate;
         private int orderstatus;
+        private string customer_location;
 
         public string OrderID
         {
@@ -99,6 +100,12 @@ namespace Repair.Models
         public List<string> Images
         {
             get;set;
+        }
+
+        public string CustomerLocation
+        {
+            get { return customer_location; }
+            set { customer_location = value; }
         }
         #endregion
     }
