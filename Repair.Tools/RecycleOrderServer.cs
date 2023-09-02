@@ -79,8 +79,8 @@ namespace Repair.Server
                 return -1;
             //string sql = "insert into " + Recycle_Order.GetName + " values(" + "\'" + order.OrderID + "\'," + "\'" + order.Device.DeviceID + "\'," + "\'" + order.UserID + "\'," + order.ExpectedPrice + ",\'" + order.Recycle_Location + "\',"
              //   + order.Recycle_Time + ")";
-            string sql = string.Format("insert into {0} values(\'{1}\',\'{2}\',\'{3}\',{4},\'{5}\',to_date(\'{6}\',\'MM/DD/YYYY HH24:MI:SS\'),{7},{8})", Recycle_Order.GetName, order.OrderID, order.Device.DeviceID, order.UserID, order.ExpectedPrice, order.Recycle_Location, order.Recycle_Time,FileHelper.UrlListToSet(order.Images), order.CustomerLocation);
-            //string sql = string.Format("insert into {0} values(\'{1}\',\'{2}\',\'{3}\',{4},\'{5}\',to_date(\'{6}\',\'YYYY/MM/DD HH24:MI:SS\'),{7},{8})", Recycle_Order.GetName, order.OrderID, order.Device.DeviceID, order.UserID, order.ExpectedPrice, order.Recycle_Location, order.Recycle_Time, FileHelper.UrlListToSet(order.Images), order.CustomerLocation);
+            string sql = string.Format("insert into {0} values(\'{1}\',\'{2}\',\'{3}\',{4},\'{5}\',to_date(\'{6}\',\'MM/DD/YYYY HH24:MI:SS\'),{7},\'{8}\')", Recycle_Order.GetName, order.OrderID, order.Device.DeviceID, order.UserID, order.ExpectedPrice, order.Recycle_Location, order.Recycle_Time,FileHelper.UrlListToSet(order.Images), order.CustomerLocation);
+            //string sql = string.Format("insert into {0} values(\'{1}\',\'{2}\',\'{3}\',{4},\'{5}\',to_date(\'{6}\',\'YYYY/MM/DD HH24:MI:SS\'),{7},\'{8}\')", Recycle_Order.GetName, order.OrderID, order.Device.DeviceID, order.UserID, order.ExpectedPrice, order.Recycle_Location, order.Recycle_Time, FileHelper.UrlListToSet(order.Images), order.CustomerLocation);
             int row = DBHelper.RunExecNonQuery(sql, null);
             return row;
         }
