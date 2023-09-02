@@ -115,10 +115,71 @@ namespace WebAPI.Controllers
         {
             JsonObject Job = (JsonObject)JsonObject.Parse(Json);
             JsonObject ret = new JsonObject();
-            if (Request.Body == null || !Job.ContainsKey("CouponID") || !Job.ContainsKey("EngineerID")
+            bool right = true;
+            if(Request.Body == null)
+            {
+                right = false;
+                ret.Add("RequestError", "null request body");
+            }
+            if (!Job.ContainsKey("CouponID"))
+            {
+                right = false;
+                ret.Add("CouponIDError", "缺少CouponID");
+            }
+            if (!Job.ContainsKey("EngineerID"))
+            {
+                right = false;
+                ret.Add("EngineerIDError", "缺少EngineerID");
+            }
+            if (!Job.ContainsKey("OrderPrice"))
+            {
+                right = false;
+                ret.Add("OrderPriceError", "缺少OrderPrice");
+            }
+            if (!Job.ContainsKey("ProblemPart"))
+            {
+                right = false;
+                ret.Add("ProblemPartError", "缺少ProblemPart");
+            }
+            if (!Job.ContainsKey("ProblemDetail"))
+            {
+                right = false;
+                ret.Add("ProblemDetailError", "缺少ProblemDetail");
+            }
+            if (!Job.ContainsKey("Requirement"))
+            {
+                right = false;
+                ret.Add("RequirementError", "缺少Requirement");
+            }
+            if (!Job.ContainsKey("Brand"))
+            {
+                right = false;
+                ret.Add("BrandError", "缺少Brand");
+            }
+            if (!Job.ContainsKey("isWarranty"))
+            {
+                right = false;
+                ret.Add("isWarrantyError", "缺少isWarranty");
+            }
+            if (!Job.ContainsKey("RepairLocation"))
+            {
+                right = false;
+                ret.Add("RepairLocationError", "缺少RepairLocation");
+            }
+            if (!Job.ContainsKey("RepairTime"))
+            {
+                right = false;
+                ret.Add("RepairTimeError", "缺少RepairTime");
+            }
+            if (!Job.ContainsKey("CustomerLocation"))
+            {
+                right = false;
+                ret.Add("CustomerLocationError", "缺少CustomerLocation");
+            }
+            if (/*Request.Body == null || !Job.ContainsKey("CouponID") || !Job.ContainsKey("EngineerID")
                 || !Job.ContainsKey("OrderPrice") || !Job.ContainsKey("ProblemPart") || !Job.ContainsKey("ProblemDetail")
                 || !Job.ContainsKey("Requirement") || !Job.ContainsKey("Brand")||!Job.ContainsKey("isWarranty")
-                || !Job.ContainsKey("RepairLocation") || !Job.ContainsKey("RepairTime"))
+                || !Job.ContainsKey("RepairLocation") || !Job.ContainsKey("RepairTime") || !Job.ContainsKey("CustomerLocation")*/!right)
             {
                 ret.Add("success", false);
                 ret.Add("Message", "缺少数据");
@@ -306,7 +367,7 @@ namespace WebAPI.Controllers
             JsonObject Job = (JsonObject)JsonObject.Parse(Json);
             JsonObject ret = new JsonObject();
             if (Request.Body == null || !Job.ContainsKey("EngineerID") || !Job.ContainsKey("Requirement")
-                || !Job.ContainsKey("RepairLocation") || !Job.ContainsKey("RepairTime"))
+                || !Job.ContainsKey("RepairLocation") || !Job.ContainsKey("RepairTime") || !Job.ContainsKey("CustomerLocation"))
             {
                 ret.Add("success", false);
                 ret.Add("Message", "缺少数据");
@@ -327,6 +388,7 @@ namespace WebAPI.Controllers
                 order.RepairOptionID.RepairRequirement = Job["Requirement"].ToString();
                 order.RepairLocation = Job["RepairLocation"].ToString();
                 order.RepairTime = Job["RepairTime"].Deserialize<DateTime>();
+                order.CustomerLocation = Job["CustomerLocation"].ToString();
                 
                 //Update Images
                 var files = Request.Form.Files;

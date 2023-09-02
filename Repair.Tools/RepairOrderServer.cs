@@ -45,6 +45,7 @@ namespace Repair.Server
                     Object.Images = (reader.IsDBNull(11) ? 
                         null : 
                         JsonSerializer.Deserialize<List<string>>(reader.GetString(11)));
+                    Object.CustomerLocation = reader.GetString(12);
 
                     string InnerSql = "select * from COUPON where id=\'" + Object.CouponID + "\'";
                     using (OracleDataReader InnerReader = DBHelper.GetDataReader(InnerSql, null))
@@ -87,6 +88,7 @@ namespace Repair.Server
                     Object.UserRate = reader.IsDBNull(9) ? null : reader.GetString(9);
                     Object.OrderStatus = reader.GetInt32(10);
                     Object.Images = reader.IsDBNull(11) ? null : JsonSerializer.Deserialize<List<string>>(reader.GetString(11));
+                    Object.CustomerLocation = reader.GetString(12);
 
                     string InnerSql = "select * from COUPON where id=\'" + Object.CouponID + "\'";
                     using (OracleDataReader InnerReader = DBHelper.GetDataReader(InnerSql, null))
@@ -122,7 +124,8 @@ namespace Repair.Server
                             + "to_date(\'" + user.RepairTime + "\',\'MM/DD/YYYY HH24:MI:SS\'),"
                             //+ "to_date(\'" + user.RepairTime + "\',\'YYYY/MM/DD HH24:MI:SS\'),"
                             + (user.UserRate == null ? "null," : "\'" + user.UserRate + "\',")
-                            + "\'" + user.OrderStatus + "\'," + FileHelper.UrlListToSet(user.Images) + ")";
+                            + "\'" + user.OrderStatus + "\'," + FileHelper.UrlListToSet(user.Images) 
+                            + "\'" + user.CustomerLocation + "\'" + ")";
             Console.WriteLine(sql);
             Console.WriteLine("\n");
             Console.WriteLine(user.RepairTime+" "+user.CreateTime);
@@ -152,7 +155,8 @@ namespace Repair.Server
                          + "engineerid=:new_ENGINEERID, userid=:new_USERID, repairoptionid=:new_OPTIONID,"
                          + "createtime=:new_CREATETIME, repairlocation=:new_LOCATION,"
                          + "repairtime=:new_REPAIRTIME, userrate=:new_RATE, orderstatus=:new_STATUS,"
-                         + "image_url=" + FileHelper.UrlListToSet(user.Images)
+                         + "image_url=" + FileHelper.UrlListToSet(user.Images) + ","
+                         + "customer_location=:new_CustomerLoc"
                          + " where orderid=\'" + old_id + "\'";
             OracleParameter[] param =
             {
@@ -166,7 +170,8 @@ namespace Repair.Server
                 new OracleParameter(":new_LOCATION",OracleDbType.Varchar2, user.RepairLocation, ParameterDirection.Input),
                 new OracleParameter(":new_REPAIRTIME",OracleDbType.TimeStamp, user.RepairTime, ParameterDirection.Input),
                 new OracleParameter(":new_RATE",OracleDbType.Varchar2, user.UserRate, ParameterDirection.Input),
-                new OracleParameter(":new_STATUS",OracleDbType.Int32, user.OrderStatus, ParameterDirection.Input)
+                new OracleParameter(":new_STATUS",OracleDbType.Int32, user.OrderStatus, ParameterDirection.Input),
+                new OracleParameter(":new_CustomerLoc",OracleDbType.Int32, user.CustomerLocation, ParameterDirection.Input)
             };
 
             int row = DBHelper.RunExecNonQuery(sql, param);
