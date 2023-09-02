@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "eGvMI771It46egFc4Ee/efdPnZ85m6TmdZXWNPUo9xxn9l7SINMPRG6pl7Sp1vqR8qGmpucFCecdqsiVPMQWXg==",
+  "dgSpecHash": "33+qb7tP+dEJkwbdKwm0srraDyOPeMZnogjp5oMl4gaXcFplOlmy2ERYmgaOMZqTLj1PeV/Sibo45DsVMb0R2w==",
   "success": true,
-  "projectFilePath": "E:\\大二下\\数据库\\小学期\\DBDesign\\Repair.Models\\Repair.Models.csproj",
+  "projectFilePath": "D:\\新建文件夹\\DBDesign\\Repair.Models\\Repair.Models.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\86138\\.nuget\\packages\\microsoft.win32.systemevents\\7.0.0\\microsoft.win32.systemevents.7.0.0.nupkg.sha512",
-    "C:\\Users\\86138\\.nuget\\packages\\system.drawing.common\\7.0.0\\system.drawing.common.7.0.0.nupkg.sha512"
+    "C:\\Users\\大十一\\.nuget\\packages\\microsoft.win32.systemevents\\7.0.0\\microsoft.win32.systemevents.7.0.0.nupkg.sha512",
+    "C:\\Users\\大十一\\.nuget\\packages\\system.drawing.common\\7.0.0\\system.drawing.common.7.0.0.nupkg.sha512"
   ],
   "logs": []
 }

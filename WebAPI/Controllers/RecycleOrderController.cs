@@ -147,18 +147,16 @@ namespace WebAPI.Controllers
                 }
                 ret.Add("TimeError", "缺少Recycle_Time");
             }
-            if (!Job.ContainsKey("Customer_Location"))
+            if (!Job.ContainsKey("CustomerLocation"))
             {
                 if (right)
                 {
                     ret.Add("success", false);
                     right = false;
                 }
-                ret.Add("CustomerLocationError", "缺少Customer_Location");
+                ret.Add("CustomerLocationError", "缺少CustomerLocation");
             }
-            if (/*Request != null && UserServer.Query(id).Count != 0
-                && Job.ContainsKey("Device_Cate") && Job.ContainsKey("Device_Type")
-                && Job.ContainsKey("ExpectedPrice") && Job.ContainsKey("Recycle_Location") && Job.ContainsKey("Recycle_Time")*/right)
+            if (right)
             {
                 //JsonObject Job = (JsonObject)(JsonObject.Parse(await stream.ReadToEndAsync()));
                 Job.Add("UserID", id);
@@ -189,6 +187,7 @@ namespace WebAPI.Controllers
                 if (row >= 0)
                 {
                     ret.Add("success", true);
+                    ret.Add("orderid", order.OrderID);
                 }
 
                 else
