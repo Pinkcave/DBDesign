@@ -156,6 +156,25 @@ namespace WebAPI.Controllers
                 }
                 ret.Add("CustomerLocationError", "缺少CustomerLocation");
             }
+            if (!Job.ContainsKey("PurchaseChannel"))
+            {
+                if (right)
+                {
+                    ret.Add("success", false);
+                    right = false;
+                }
+                ret.Add("PurchaseChannelError", "缺少PurchaseChannel");
+            }
+            if (!Job.ContainsKey("StorageCapacity"))
+            {
+                if (right)
+                {
+                    ret.Add("success", false);
+                    right = false;
+                }
+                ret.Add("StorageCapacityError", "缺少StorageCapacity");
+
+            }
             if (right)
             {
                 //JsonObject Job = (JsonObject)(JsonObject.Parse(await stream.ReadToEndAsync()));
@@ -283,7 +302,8 @@ namespace WebAPI.Controllers
             JsonObject Job = (JsonObject)JsonObject.Parse(Json);
             JsonObject ret = new JsonObject();
             if (Request != null && UserServer.Query(id).Count != 0 && RecycleOrderServer.Query(orderid).Count != 0
-                && Job.ContainsKey("ExpectedPrice") && Job.ContainsKey("Recycle_Location") && Job.ContainsKey("Recycle_Time") && Job.ContainsKey("Customer_Location"))
+                && Job.ContainsKey("ExpectedPrice") && Job.ContainsKey("Recycle_Location") && Job.ContainsKey("Recycle_Time") 
+                && Job.ContainsKey("CustomerLocation") && Job.ContainsKey("PurchaseChannel") && Job.ContainsKey("StorageCapacity"))
             {
                 //Job = (JsonObject)(JsonObject.Parse(await stream.ReadToEndAsync()));
                 Job.Add("UserID", id);
@@ -292,7 +312,9 @@ namespace WebAPI.Controllers
                 order.ExpectedPrice = (float)Job["ExpectedPrice"];
                 order.Recycle_Location = Job["Recycle_Location"].ToString();
                 order.Recycle_Time = (DateTime)Job["Recycle_Time"];
-                order.CustomerLocation = Job["Customer_Location"].ToString();
+                order.CustomerLocation = Job["CustomerLocation"].ToString();
+                order.PurchaseChannel = Job["PurchaseChannel"].ToString();
+                order.StorageCapacity = Job["StorageCapacity"].ToString();
                 //Update Files
                 var files = Request.Form.Files;
                 if (files.Count > 0)

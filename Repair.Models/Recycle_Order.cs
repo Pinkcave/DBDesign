@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,6 +19,8 @@ namespace Repair.Models
         private float expectedprice;
         private string location;
         private string customer_location;
+        private string purchase_channel;
+        private string storage_capacity;
         private DateTime time;
 
         public string OrderID
@@ -64,6 +67,18 @@ namespace Repair.Models
         {
             get { return customer_location; }
             set { customer_location = value; }
+        }
+
+        public string PurchaseChannel
+        {
+            get { return purchase_channel; }
+            set { purchase_channel = value; }
+        }
+
+        public string StorageCapacity
+        {
+            get { return storage_capacity; }
+            set { storage_capacity = value; }
         }
         #endregion
     }

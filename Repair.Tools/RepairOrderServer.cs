@@ -124,7 +124,7 @@ namespace Repair.Server
                             + "to_date(\'" + user.RepairTime + "\',\'MM/DD/YYYY HH24:MI:SS\'),"
                             //+ "to_date(\'" + user.RepairTime + "\',\'YYYY/MM/DD HH24:MI:SS\'),"
                             + (user.UserRate == null ? "null," : "\'" + user.UserRate + "\',")
-                            + "\'" + user.OrderStatus + "\'," + FileHelper.UrlListToSet(user.Images) 
+                            + "\'" + user.OrderStatus + "\'," + FileHelper.UrlListToSet(user.Images) + ","
                             + "\'" + user.CustomerLocation + "\'" + ")";
             Console.WriteLine(sql);
             Console.WriteLine("\n");
