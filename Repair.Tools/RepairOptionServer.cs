@@ -89,7 +89,7 @@ namespace Repair.Server
                 return -1;
             string sql = "update " + Repair_Options.GetName + " set "
                          + "optionid=:new_OPTIONID, repairrequirement=:new_REPAIR, repaircategoryid=:new_CATEID,"
-                         + "brand=:new_BRAND, isWarranty=:new_WARRANTY"
+                         + "brand=:new_BRAND, isWarranty=:new_WARRANTY "
                          + "where optionid=\'" + old_id + "\'";
             OracleParameter[] param =
             {

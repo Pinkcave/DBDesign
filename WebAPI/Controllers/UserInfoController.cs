@@ -58,8 +58,13 @@ namespace WebAPI.Controllers
             if (Job.ContainsKey("UserName") && Job.ContainsKey("Password") && Job.ContainsKey("Name") && Job.ContainsKey("Identity")
                 && Job.ContainsKey("Telephone") && Job.ContainsKey("Email"))
             {
-                UserInfo user = JsonSerializer.Deserialize<UserInfo>(Job);
-                user.UserId = uid;
+                UserInfo user = UserServer.Query(uid).FirstOrDefault();
+                user.UserName = Job["UserName"].ToString();
+                user.Password = Job["Password"].ToString();
+                user.Name = Job["Name"].ToString();
+                user.Identity = Job["Identity"].ToString();
+                user.Telephone = Job["Telephone"].ToString();
+                user.Email = Job["Email"].ToString();
                 int row = UserServer.Update(user, uid);
                 if (row == 1)
                     return "{\"status\":true}";

@@ -10,6 +10,7 @@ using Repair.Server;
 using System.Text.Json.Nodes;
 using System.Web;
 using Repair.Helper;
+using System.Security.Cryptography;
 
 namespace WebAPI.Controllers
 {
@@ -186,6 +187,8 @@ namespace WebAPI.Controllers
                 device.DeviceID = DeviceServer.Count().ToString();
                 device.Device_Cate_ID = DeviceCateServer.QueryByAttribute("category_name", "\'" + Job["Device_Cate"].ToString() + "\'").FirstOrDefault();
                 device.Device_Type_ID = DeviceTypeServer.QueryByAttribute("type_name", "\'" + Job["Device_Type"].ToString() + "\'").FirstOrDefault();
+                device.PurchaseChannel = Job["PurchaseChannel"].ToString();
+                device.StorageCapacity = Job["StorageCapacity"].ToString();
                 //loadfile
                 string rootpath = "wwwroot/RecycleImage";
                 var files = Request.Form.Files;
@@ -205,6 +208,7 @@ namespace WebAPI.Controllers
 
                 if (row >= 0)
                 {
+                    NewsSystemServer.AddNews(id,"订单创建成功",string.Format("回收订单{0}成功创建，可至订单页面查看",order.OrderID));
                     ret.Add("success", true);
                     ret.Add("orderid", order.OrderID);
                 }
@@ -225,7 +229,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpDelete("{id}/{orderid}")]
-        public JsonObject RemoveOrder(string orderid)
+        public JsonObject RemoveOrder(string id ,string orderid)
         {
             
             JsonObject ret = new JsonObject();
@@ -235,6 +239,13 @@ namespace WebAPI.Controllers
             {
                 ret.Add("success", false);
                 ret.Add("Message", "不存在订单");
+                return ret;
+            }
+
+            if(order.UserID != id) 
+            {
+                ret.Add("success", false);
+                ret.Add("Message", "该用户不存在该订单");
                 return ret;
             }
 
@@ -258,7 +269,7 @@ namespace WebAPI.Controllers
                     FileHelper.DeleteFile(url.Replace("http://110.42.220.245:8081", "wwwroot"));
                 }
             }
-
+            NewsSystemServer.AddNews(id, "订单删除成功", string.Format("回收订单{0}成功删除", order.OrderID));
             ret.Add("success", true);
             return ret;
         }
@@ -303,7 +314,7 @@ namespace WebAPI.Controllers
             JsonObject ret = new JsonObject();
             if (Request != null && UserServer.Query(id).Count != 0 && RecycleOrderServer.Query(orderid).Count != 0
                 && Job.ContainsKey("ExpectedPrice") && Job.ContainsKey("Recycle_Location") && Job.ContainsKey("Recycle_Time") 
-                && Job.ContainsKey("CustomerLocation") && Job.ContainsKey("PurchaseChannel") && Job.ContainsKey("StorageCapacity"))
+                && Job.ContainsKey("CustomerLocation"))
             {
                 //Job = (JsonObject)(JsonObject.Parse(await stream.ReadToEndAsync()));
                 Job.Add("UserID", id);
@@ -313,8 +324,6 @@ namespace WebAPI.Controllers
                 order.Recycle_Location = Job["Recycle_Location"].ToString();
                 order.Recycle_Time = (DateTime)Job["Recycle_Time"];
                 order.CustomerLocation = Job["CustomerLocation"].ToString();
-                order.PurchaseChannel = Job["PurchaseChannel"].ToString();
-                order.StorageCapacity = Job["StorageCapacity"].ToString();
                 //Update Files
                 var files = Request.Form.Files;
                 if (files.Count > 0)
@@ -345,6 +354,7 @@ namespace WebAPI.Controllers
                 int row = RecycleOrderServer.Update(order, orderid);
                 if (row > 0)
                 {
+                    NewsSystemServer.AddNews(id, "订单修改成功", string.Format("回收订单{0}成功修改，可至回收页面查看", order.OrderID));
                     ret.Add("success", true);
                 }
                 else

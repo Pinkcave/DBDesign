@@ -39,6 +39,8 @@ namespace Repair.Server
                     Object.Device_Cate_ID = cate;
                     Device_Type type = DeviceTypeServer.Query(reader.GetString(2)).FirstOrDefault();
                     Object.Device_Type_ID = type;
+                    Object.PurchaseChannel = reader.GetString(3);
+                    Object.StorageCapacity = reader.GetString(4);
                     list.Add(Object);
                 }
                 reader.Close();
@@ -62,6 +64,8 @@ namespace Repair.Server
                     Object.Device_Cate_ID = cate;
                     Device_Type type = DeviceTypeServer.Query(reader.GetString(2)).FirstOrDefault();
                     Object.Device_Type_ID = type;
+                    Object.PurchaseChannel = reader.GetString(3);
+                    Object.StorageCapacity = reader.GetString(4);
                     list.Add(Object);
                 }
                 reader.Close();
@@ -115,7 +119,8 @@ namespace Repair.Server
             //Device? device = JsonSerializer.Deserialize<Device>(JsonInfo);
             if (device == null)
                 return -1;
-            string sql = "insert into " + Device.GetName + " values(" + "\'" + device.DeviceID + "\'," + "\'" + device.Device_Cate_ID.CategoryID + "\'," + "\'" + device.Device_Type_ID.TypeID + "\')";
+            //string sql = "insert into " + Device.GetName + " values(" + "\'" + device.DeviceID + "\'," + "\'" + device.Device_Cate_ID.CategoryID + "\'," + "\'" + device.Device_Type_ID.TypeID + "\')";
+            string sql = string.Format("insert into {0} values(\'{1}\',\'{2}\',\'{3}\',\'{4}\',\'{5}\')",Device.GetName,device.DeviceID,device.Device_Cate_ID.CategoryID,device.Device_Type_ID.TypeID,device.PurchaseChannel,device.StorageCapacity);
             int row = DBHelper.RunExecNonQuery(sql, null);
             return row;
         }
@@ -138,13 +143,15 @@ namespace Repair.Server
             if (device == null)
                 return -1;
             string sql = "update " + Device.GetName + " set "
-                         + "DeviceID=:new_deviceID, Device_Cate_ID=:new_cateID, Device_Type_ID=:new_typeID,"
+                         + "DeviceID=:new_deviceID, Device_Cate_ID=:new_cateID, Device_Type_ID=:new_typeID,Purchase_Channel=:new_Channel,Storage_Capacity=:new_Storage"
                          + " where id=\'" + old_id + "\'";
             OracleParameter[] param =
             {
                 new OracleParameter(":new_deviceID", OracleDbType.Varchar2, device.DeviceID, ParameterDirection.Input),
                 new OracleParameter(":new_cateID", OracleDbType.Varchar2, device.Device_Cate_ID.CategoryID, ParameterDirection.Input),
-                new OracleParameter(":new_typeID", OracleDbType.Varchar2, device.Device_Type_ID.TypeID, ParameterDirection.Input)
+                new OracleParameter(":new_typeID", OracleDbType.Varchar2, device.Device_Type_ID.TypeID, ParameterDirection.Input),
+                new OracleParameter(":new_Channel", OracleDbType.Varchar2, device.PurchaseChannel, ParameterDirection.Input),
+                new OracleParameter(":new_Storage", OracleDbType.Varchar2, device.StorageCapacity, ParameterDirection.Input)
             };
 
             int row = DBHelper.RunExecNonQuery(sql, param);

@@ -176,6 +176,11 @@ namespace WebAPI.Controllers
                 right = false;
                 ret.Add("CustomerLocationError", "缺少CustomerLocation");
             }
+            if (!Job.ContainsKey("Password"))
+            {
+                right = false;
+                ret.Add("PasswordError", "缺少Password");
+            }
             if (/*Request.Body == null || !Job.ContainsKey("CouponID") || !Job.ContainsKey("EngineerID")
                 || !Job.ContainsKey("OrderPrice") || !Job.ContainsKey("ProblemPart") || !Job.ContainsKey("ProblemDetail")
                 || !Job.ContainsKey("Requirement") || !Job.ContainsKey("Brand")||!Job.ContainsKey("isWarranty")
@@ -191,7 +196,7 @@ namespace WebAPI.Controllers
                 //查看用户余额
                 using (BalanceController balanceController = new BalanceController())
                 {
-                    ret = balanceController.Pay(uid, Job["OrderPrice"].Deserialize<float>());
+                    ret = balanceController.Pay(uid, Job["OrderPrice"].Deserialize<float>(),Job);
                     if (!ret["success"].Deserialize<bool>())
                         return ret;
                     else
@@ -269,6 +274,8 @@ namespace WebAPI.Controllers
                     return ret;
                 }
                 ret.Add("success", true);
+                ret.Add("orderid", neworder.OrderID);
+                NewsSystemServer.AddNews(uid, "订单创建成功", string.Format("维修订单{0}成功创建，可至维修页面查看", neworder.OrderID));
             }
             return ret;
         }
@@ -310,8 +317,8 @@ namespace WebAPI.Controllers
                     FileHelper.DeleteFile(url.Replace("http://110.42.220.245:8081", "wwwroot"));
                 }
             }
-            
 
+            NewsSystemServer.AddNews(uid, "订单删除成功", string.Format("维修订单{0}成功删除", order.OrderID));
             ret.Add("success", true);
             return ret;
         }
@@ -421,6 +428,7 @@ namespace WebAPI.Controllers
                 {
                     if (RepairOrderServer.Update(order, id) > 0)
                     {
+                        NewsSystemServer.AddNews(uid, "订单修改成功", string.Format("维修订单{0}成功修改，可至维修页面查看", order.OrderID));
                         ret.Add("success", true);
                         return ret;
                     }

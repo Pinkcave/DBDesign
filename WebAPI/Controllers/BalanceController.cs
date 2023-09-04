@@ -10,7 +10,7 @@ namespace WebAPI.Controllers
     public class BalanceController : Controller
     {
         [HttpPost("Charge/{uid}")]
-        public JsonObject Charge(string uid, [FromQuery]float num)
+        public JsonObject Charge(string uid, [FromQuery]float num,[FromBody]JsonObject Job)
         {
             JsonObject ret = new JsonObject();
             UserInfo user = UserServer.Query(uid).FirstOrDefault();
@@ -20,6 +20,13 @@ namespace WebAPI.Controllers
                 ret.Add("Message", "用户不存在");
                 return ret;
             }
+            if (!Job.ContainsKey("Password") || user.Password != Job["Password"].ToString())
+            {
+                ret.Add("success", false);
+                ret.Add("Message", "密码不正确");
+                return ret;
+            }
+
             CreditCard card = CreditCardServer.GetDefaultCard(uid);
             if(card==null)
             {
@@ -57,7 +64,7 @@ namespace WebAPI.Controllers
             return ret;
         }
         [HttpPost("Withdrawal/{uid}")]
-        public JsonObject WithDrawal(string uid, [FromQuery]float num) 
+        public JsonObject WithDrawal(string uid, [FromQuery]float num, [FromBody]JsonObject Job) 
         {
             JsonObject ret = new JsonObject();
             UserInfo user = UserServer.Query(uid).FirstOrDefault();
@@ -67,6 +74,14 @@ namespace WebAPI.Controllers
                 ret.Add("Message", "用户不存在");
                 return ret;
             }
+
+            if (!Job.ContainsKey("Password") || user.Password != Job["Password"].ToString())
+            {
+                ret.Add("success", false);
+                ret.Add("Message", "密码不正确");
+                return ret;
+            }
+
             CreditCard card = CreditCardServer.GetDefaultCard(uid);
             if (card == null)
             {
@@ -105,7 +120,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("Pay/{uid}")]
-        public JsonObject Pay(string uid, [FromQuery]float num)
+        public JsonObject Pay(string uid, [FromQuery]float num,[FromBody]JsonObject Job)
         {
             JsonObject ret = new JsonObject();
             UserInfo? user = UserServer.Query(uid).FirstOrDefault();
@@ -113,6 +128,13 @@ namespace WebAPI.Controllers
             {
                 ret.Add("success", false);
                 ret.Add("Message", "用户不存在");
+                return ret;
+            }
+
+            if (!Job.ContainsKey("Password")||user.Password != Job["Password"].ToString())
+            {
+                ret.Add("success", false);
+                ret.Add("Message", "密码不正确");
                 return ret;
             }
 

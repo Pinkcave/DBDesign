@@ -171,7 +171,7 @@ namespace Repair.Server
                 new OracleParameter(":new_REPAIRTIME",OracleDbType.TimeStamp, user.RepairTime, ParameterDirection.Input),
                 new OracleParameter(":new_RATE",OracleDbType.Varchar2, user.UserRate, ParameterDirection.Input),
                 new OracleParameter(":new_STATUS",OracleDbType.Int32, user.OrderStatus, ParameterDirection.Input),
-                new OracleParameter(":new_CustomerLoc",OracleDbType.Int32, user.CustomerLocation, ParameterDirection.Input)
+                new OracleParameter(":new_CustomerLoc",OracleDbType.Varchar2, user.CustomerLocation, ParameterDirection.Input)
             };
 
             int row = DBHelper.RunExecNonQuery(sql, param);

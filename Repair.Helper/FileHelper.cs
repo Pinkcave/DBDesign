@@ -22,7 +22,7 @@ namespace Repair.Helper
         }
         public static bool DeleteFile(string path)
         {
-            if(!Directory.Exists(path))
+            if(!File.Exists(path))
                 return false;
             File.Delete(path);
             return true;

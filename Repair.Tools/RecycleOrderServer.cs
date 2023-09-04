@@ -38,8 +38,6 @@ namespace Repair.Server
                     Object.Recycle_Time = reader.GetDateTime(5);
                     Object.Images = reader.IsDBNull(6) ? null : JsonSerializer.Deserialize<List<string>>(reader.GetString(6));
                     Object.CustomerLocation = reader.GetString(7);
-                    Object.PurchaseChannel = reader.GetString(8);
-                    Object.StorageCapacity = reader.GetString(9);
                     list.Add(Object);
                 }
                 reader.Close();
@@ -67,8 +65,6 @@ namespace Repair.Server
                     Object.Recycle_Time = reader.GetDateTime(5);
                     Object.Images = reader.IsDBNull(6) ? null : JsonSerializer.Deserialize<List<string>>(reader.GetString(6));
                     Object.CustomerLocation = reader.GetString(7);
-                    Object.PurchaseChannel = reader.GetString(8);
-                    Object.StorageCapacity = reader.GetString(9);
                     list.Add(Object);
                 }
                 reader.Close();
@@ -83,8 +79,8 @@ namespace Repair.Server
                 return -1;
             //string sql = "insert into " + Recycle_Order.GetName + " values(" + "\'" + order.OrderID + "\'," + "\'" + order.Device.DeviceID + "\'," + "\'" + order.UserID + "\'," + order.ExpectedPrice + ",\'" + order.Recycle_Location + "\',"
              //   + order.Recycle_Time + ")";
-            string sql = string.Format("insert into {0} values(\'{1}\',\'{2}\',\'{3}\',{4},\'{5}\',to_date(\'{6}\',\'MM/DD/YYYY HH24:MI:SS\'),{7},\'{8}\',\'{9}\',\'{10}\')", Recycle_Order.GetName, order.OrderID, order.Device.DeviceID, order.UserID, order.ExpectedPrice, order.Recycle_Location, order.Recycle_Time,FileHelper.UrlListToSet(order.Images), order.CustomerLocation, order.PurchaseChannel, order.StorageCapacity);
-            //string sql = string.Format("insert into {0} values(\'{1}\',\'{2}\',\'{3}\',{4},\'{5}\',to_date(\'{6}\',\'YYYY/MM/DD HH24:MI:SS\'),{7},\'{8}\',\'{9}\',\'{10}\')", Recycle_Order.GetName, order.OrderID, order.Device.DeviceID, order.UserID, order.ExpectedPrice, order.Recycle_Location, order.Recycle_Time, FileHelper.UrlListToSet(order.Images), order.CustomerLocation, order.PurchaseChannel, order.StorageCapacity);
+            string sql = string.Format("insert into {0} values(\'{1}\',\'{2}\',\'{3}\',{4},\'{5}\',to_date(\'{6}\',\'MM/DD/YYYY HH24:MI:SS\'),{7},\'{8}\')", Recycle_Order.GetName, order.OrderID, order.Device.DeviceID, order.UserID, order.ExpectedPrice, order.Recycle_Location, order.Recycle_Time,FileHelper.UrlListToSet(order.Images), order.CustomerLocation);
+            //string sql = string.Format("insert into {0} values(\'{1}\',\'{2}\',\'{3}\',{4},\'{5}\',to_date(\'{6}\',\'YYYY/MM/DD HH24:MI:SS\'),{7},\'{8}\')", Recycle_Order.GetName, order.OrderID, order.Device.DeviceID, order.UserID, order.ExpectedPrice, order.Recycle_Location, order.Recycle_Time, FileHelper.UrlListToSet(order.Images), order.CustomerLocation);
             int row = DBHelper.RunExecNonQuery(sql, null);
             return row;
         }
@@ -110,9 +106,7 @@ namespace Repair.Server
                          + "OrderID=:new_OrderID, DeviceID=:new_DeviceID, UserID=:new_UserID,"
                          + "ExpectedPrice=:new_Price, Recycle_Location=:new_Loc, Recycle_Time=:new_Time, "
                          + "image_url=" + FileHelper.UrlListToSet(order.Images) + ", "
-                         + "customer_location=:new_Customer_Loc, "
-                         + "purchase_channel=:new_PurchaseChannel, "
-                         + "storage_capacity=:new_StorageCapacity"
+                         + "customer_location=:new_Customer_Loc"
                          + " where orderid=\'" + old_id + "\'";
             OracleParameter[] param =
             {
@@ -123,8 +117,6 @@ namespace Repair.Server
                 new OracleParameter(":new_Loc", OracleDbType.Varchar2, order.Recycle_Location, ParameterDirection.Input),
                 new OracleParameter(":new_Time", OracleDbType.TimeStamp, order.Recycle_Time, ParameterDirection.Input),
                 new OracleParameter(":new_Customer_Loc", OracleDbType.Varchar2, order.CustomerLocation, ParameterDirection.Input),
-                new OracleParameter(":new_PurchaseChannel", OracleDbType.Varchar2, order.PurchaseChannel, ParameterDirection.Input),
-                new OracleParameter(":new_StorageCapacity", OracleDbType.Varchar2, order.StorageCapacity, ParameterDirection.Input)
             };
 
             int row = DBHelper.RunExecNonQuery(sql, param);

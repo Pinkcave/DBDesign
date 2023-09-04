@@ -24,7 +24,7 @@ namespace Repair.Server
             {
                 sql = "select * from " + News_System.GetName;
             }
-            List<News_System> userlist = new List<News_System>();
+            List<News_System> newslist = new List<News_System>();
             using (OracleDataReader reader = DBHelper.GetDataReader(sql, null))
             {
                 while (reader.Read())
@@ -36,18 +36,18 @@ namespace Repair.Server
                     Object.News_Date = reader.GetDateTime(3);
                     Object.News_Content = reader.GetString(4);
                     Object.IsRead = reader.GetInt32(5);
-                    userlist.Add(Object);
+                    newslist.Add(Object);
                 }
                 reader.Close();
             }
-            return userlist;
+            return newslist;
         }
 
         public static List<News_System> QueryByAttribute(string attribute,string value)
         {
             string sql = "select * from News_System where {0} = {1}";
             sql=string.Format(sql,attribute,value);
-            List<News_System> userlist = new List<News_System>();
+            List<News_System> newslist = new List<News_System>();
             using (OracleDataReader reader = DBHelper.GetDataReader(sql, null))
             {
                 while (reader.Read())
@@ -59,25 +59,26 @@ namespace Repair.Server
                     Object.News_Date = reader.GetDateTime(3);
                     Object.News_Content = reader.GetString(4);
                     Object.IsRead = reader.GetInt32(5);
-                    userlist.Add(Object);
+                    newslist.Add(Object);
                 }
                 reader.Close();
             }
-            return userlist;
+            return newslist;
         }
 
-        public static int Insert(string JsonInfo)
+        public static int Insert(News_System news)
         {
-            News_System? user = JsonSerializer.Deserialize<News_System>(JsonInfo);
-            if (user == null)
+            //News_System? news = JsonSerializer.Deserialize<News_System>(JsonInfo);
+            if (news == null)
                 return -1;
             string sql = "insert into " + News_System.GetName + " values("
-                            + "\'" + user.ID + "\',"
-                            + "\'" + user.UserID + "\',"
-                            + "\'" + user.News_Title + "\',"
-                            + "to_timestamp(\'" + user.News_Date + "\',\'YYYY-MM-DD HH24:MI:SS\'),"
-                            + "\'" + user.News_Content + "\',"
-                            + user.IsRead + ")";
+                            + "\'" + news.ID + "\',"
+                            + "\'" + news.UserID + "\',"
+                            + "\'" + news.News_Title + "\',"
+                            + "to_timestamp(\'" + news.News_Date + "\',\'MM-DD-YYYY HH24:MI:SS\'),"
+                            //+ "to_timestamp(\'" + news.News_Date + "\',\'YYYY-MM-DD HH24:MI:SS\'),"
+                            + "\'" + news.News_Content + "\',"
+                            + news.IsRead + ")";
 
             int row = DBHelper.RunExecNonQuery(sql, null);
             return row;
@@ -95,10 +96,10 @@ namespace Repair.Server
             return row;
         }
 
-        public static int Update(string JsonInfo, string old_id)
+        public static int Update(News_System news, string old_id)
         {
-            News_System? user = JsonSerializer.Deserialize<News_System>(JsonInfo);
-            if (user == null)
+            //News_System? news = JsonSerializer.Deserialize<News_System>(JsonInfo);
+            if (news == null)
                 return -1;
             string sql = "update " + News_System.GetName + " set "
                          + "id=:new_ID, userid=:new_USERID, news_title=:new_TITLE,"
@@ -106,17 +107,34 @@ namespace Repair.Server
                          + "where id=\'" + old_id + "\'";
             OracleParameter[] param =
             {
-                new OracleParameter(":new_ID", OracleDbType.Varchar2, user.ID, ParameterDirection.Input),
-                new OracleParameter(":new_USERID", OracleDbType.Varchar2, user.UserID, ParameterDirection.Input),
-                new OracleParameter(":new_TITLE", OracleDbType.Varchar2, user.News_Title, ParameterDirection.Input),
-                new OracleParameter(":new_DATE", OracleDbType.TimeStamp, user.News_Date, ParameterDirection.Input),
-                new OracleParameter(":new_CONTENT", OracleDbType.Varchar2, user.News_Content, ParameterDirection.Input),
-                new OracleParameter(":new_ISREAD", OracleDbType.Int32, user.IsRead, ParameterDirection.Input)
+                new OracleParameter(":new_ID", OracleDbType.Varchar2, news.ID, ParameterDirection.Input),
+                new OracleParameter(":new_USERID", OracleDbType.Varchar2, news.UserID, ParameterDirection.Input),
+                new OracleParameter(":new_TITLE", OracleDbType.Varchar2, news.News_Title, ParameterDirection.Input),
+                new OracleParameter(":new_DATE", OracleDbType.TimeStamp, news.News_Date, ParameterDirection.Input),
+                new OracleParameter(":new_CONTENT", OracleDbType.Varchar2, news.News_Content, ParameterDirection.Input),
+                new OracleParameter(":new_ISREAD", OracleDbType.Int32, news.IsRead, ParameterDirection.Input)
                 
             };
 
             int row = DBHelper.RunExecNonQuery(sql, param);
             return row;
+        }
+
+        public static bool AddNews(string uid, string title, string content)
+        {
+            News_System news = new News_System();
+            DateTime current = DateTime.Now;
+            news.ID = uid + '&' + current.Ticks.ToString();
+            news.UserID = uid;
+            news.News_Title = title;
+            news.News_Content = content;
+            news.News_Date = current;
+            news.IsRead = 0;
+            if(Insert(news)<=0)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

@@ -69,17 +69,7 @@ namespace Repair.Models
             set { customer_location = value; }
         }
 
-        public string PurchaseChannel
-        {
-            get { return purchase_channel; }
-            set { purchase_channel = value; }
-        }
-
-        public string StorageCapacity
-        {
-            get { return storage_capacity; }
-            set { storage_capacity = value; }
-        }
+        
         #endregion
     }
 }
